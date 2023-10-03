@@ -1,0 +1,3 @@
+[submodule "lib/rctjavalib"]
+	path = lib/rctjavalib
+	url = https://github.com/baumus/rctjavalib.git
