@@ -1,0 +1,25 @@
+{
+  "triggers": [
+    {
+      "id": "the-soc-has-changed",
+      "title": {
+        "en": "The SOC has changed"
+      },
+      "hint": {
+        "en": "The State of charge of the battery has changed."
+      },
+      "tokens": [
+        {
+          "type": "number",
+          "name": "soc",
+          "title": {
+            "en": "SOC"
+          },
+          "example": {
+            "en": "58"
+          }
+        }
+      ]
+    }
+  ]
+}

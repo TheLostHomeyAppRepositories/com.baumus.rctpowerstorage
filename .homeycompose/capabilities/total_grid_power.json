@@ -1,0 +1,14 @@
+{
+    "type": "number",
+    "title": {
+      "en": "Total Grid Power"
+    },
+    "uiComponent": "sensor",
+    "getable": true,
+    "setable": false,
+    "units": {
+      "en": "W"
+    },
+    "decimals": 0,
+    "icon": "/assets/electric-tower.svg"
+  }

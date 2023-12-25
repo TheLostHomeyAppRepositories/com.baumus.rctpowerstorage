@@ -1,0 +1,67 @@
+{
+  "name": {
+    "en": "RCT Power Storage DC"
+  },
+  "class": "solarpanel",
+  "capabilities": [
+    "measure_power",
+    "total_grid_power",
+    "solar_power",
+    "battery_power",
+    "load_household",
+    "measure_battery",
+    "battery_modus"
+  ],
+  "energy": {
+    "batteries": [
+      "INTERNAL"
+    ]
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "images": {
+    "small": "{{driverAssetsPath}}/images/small.png",
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "xlarge": "{{driverAssetsPath}}/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "enter_ip",
+      "next": "list_devices"
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "prev": "enter_ip",
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "id": "DeviceId",
+      "type": "label",
+      "value": "",
+      "label": {
+        "en": "RCT Power Storage DC Serial Number"
+      }
+    },
+    {
+      "id": "polling_interval",
+      "type": "number",
+      "value": 20,
+      "label": {
+        "en": "Polling interval in seconds"
+      }
+    }
+  ]
+}

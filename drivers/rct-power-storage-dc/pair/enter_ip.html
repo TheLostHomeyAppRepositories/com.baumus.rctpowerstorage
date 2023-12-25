@@ -1,0 +1,34 @@
+<script type="text/javascript">
+    Homey.setTitle("Specify RCT Power Storage IP/hostname and Port");
+
+    function doSubmit(){
+        let hostname = document.getElementById('hostname').value;
+        let port = document.getElementById('port').value;
+
+        if(!hostname || !port){
+            Homey.alert('Please fill in all fields');
+        }
+        else {
+            Homey.emit('validate', {"host": hostname, "port": port })
+                .then(result => {
+                    if (result == 'ok' ) {
+                        Homey.nextView();
+                    } else {
+                        Homey.alert('Unable to connect');
+                    }
+                })
+                .catch(error => {
+                    Homey.alert(error);
+                });
+        }
+    }
+
+</script>
+
+<label for="hostname">Hostname/IP address</label>
+<input type="text" id="hostname" name="hostname" placeholder="IP/hostname" required/><br />
+
+<label for="port">Port</label>
+<input type="text" id="port" name="port" placeholder="Port" required/><br />
+
+<button type="button" onclick="doSubmit()">Save</button>

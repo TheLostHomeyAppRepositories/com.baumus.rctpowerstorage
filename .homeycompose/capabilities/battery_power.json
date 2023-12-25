@@ -1,0 +1,14 @@
+{
+    "type": "number",
+    "title": {
+      "en": "Battery charging"
+    },
+    "uiComponent": "sensor",
+    "getable": true,
+    "setable": false,
+    "units": {
+      "en": "W"
+    },
+    "decimals": 0,
+    "icon": "/assets/charging.svg"
+    }
