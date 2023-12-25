@@ -4,11 +4,11 @@
   },
   "class": "solarpanel",
   "capabilities": [
+    "measure_power",
+    "battery_power",
     "solar_power",
     "total_grid_power",
-    "battery_power",
     "load_household",
-    "measure_power",
     "measure_battery",
     "battery_modus"
   ],

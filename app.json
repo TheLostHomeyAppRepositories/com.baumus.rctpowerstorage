@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.baumus.rctpowerstorage",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -65,11 +65,11 @@
       },
       "class": "solarpanel",
       "capabilities": [
+        "measure_power",
+        "battery_power",
         "solar_power",
         "total_grid_power",
-        "battery_power",
         "load_household",
-        "measure_power",
         "measure_battery",
         "battery_modus"
       ],
