@@ -52,7 +52,7 @@
       "type": "label",
       "value": "",
       "label": {
-        "en": "RCT Power Storage DC Serial Number"
+        "en": "Serial Number of the device"
       }
     },
     {
@@ -60,7 +60,7 @@
       "type": "label",
       "value": "",
       "label": {
-        "en": "RCT Power Storage DC IP Address"
+        "en": "IP Address of the device"
       }
     },
     {
@@ -68,7 +68,7 @@
       "type": "label",
       "value": "",
       "label": {
-        "en": "RCT Power Storage DC Port"
+        "en": "Port of the device"
       }
     },
     {
