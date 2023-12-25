@@ -56,6 +56,22 @@
       }
     },
     {
+      "id": "DeviceIP",
+      "type": "label",
+      "value": "",
+      "label": {
+        "en": "RCT Power Storage DC IP Address"
+      }
+    },
+    {
+      "id": "DevicePort",
+      "type": "label",
+      "value": "",
+      "label": {
+        "en": "RCT Power Storage DC Port"
+      }
+    },
+    {
       "id": "polling_interval",
       "type": "number",
       "value": 20,

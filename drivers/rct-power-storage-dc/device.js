@@ -14,6 +14,8 @@ class MyDevice extends Device {
 
     await this.setSettings({
       DeviceId: this.getData().id,
+      DeviceIP: this.getStoreValue('address'),
+      DevicePort: this.getStoreValue('port'),
     });
 
     this.updateMyDevice();
