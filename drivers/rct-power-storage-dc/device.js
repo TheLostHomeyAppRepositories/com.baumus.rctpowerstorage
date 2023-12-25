@@ -12,16 +12,29 @@ class MyDevice extends Device {
   async onInit() {
     this.log('MyDevice has been initialized');
 
+    // Establish a connection
+    const conn = new Connection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
+    await conn.connect();
+
+    // Query the Battery Capacity
+    const bcapacity = await conn.queryFloat32(Identifier.BATTERY_CAPACITY_AH);
+    const bvoltage = await conn.queryFloat32(Identifier.BATTERY_VOLTAGE);
+    const roundedCapacity = (Math.round(bcapacity * bvoltage / 1000 * 10) / 10).toFixed(1);
+
     await this.setSettings({
       DeviceId: this.getData().id,
       DeviceIP: this.getStoreValue('address'),
       DevicePort: this.getStoreValue('port'),
+      battery_capacity: roundedCapacity.toString()
     });
+
+    // Close the connection when done
+    conn.close();
 
     this.updateMyDevice();
 
     // Polling
-    setInterval (() => {
+    setInterval(() => {
       this.updateMyDevice();
     }, this.getSetting('polling_interval') * 1000);
   }

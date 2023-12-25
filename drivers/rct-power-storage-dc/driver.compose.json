@@ -78,6 +78,14 @@
       "label": {
         "en": "Polling interval in seconds"
       }
+    },
+    {
+      "id": "battery_capacity",
+      "type": "label",
+      "value": "",
+      "label": {
+        "en": "Battery Capacity in kWh"
+      } 
     }
   ]
 }
