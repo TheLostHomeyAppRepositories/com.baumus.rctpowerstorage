@@ -25,5 +25,12 @@
   "author": {
     "name": "Robin Baum",
     "email": "robinbaum@web.de"
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "RobinBaum"
+      }
+    }
   }
 }
