@@ -32,6 +32,7 @@ class MyDevice extends Device {
     conn.close();
 
     this.updateMyDevice();
+    //this.log('MyDevice has been updated');
 
     // Polling
     setInterval(() => {
