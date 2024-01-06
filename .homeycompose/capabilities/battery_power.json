@@ -1,7 +1,7 @@
 {
     "type": "number",
     "title": {
-      "en": "Battery charging"
+      "en": "Battery Charge"
     },
     "uiComponent": "sensor",
     "getable": true,

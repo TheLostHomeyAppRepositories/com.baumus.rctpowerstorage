@@ -25,10 +25,16 @@
 
 </script>
 
-<label for="hostname">Hostname/IP address</label>
-<input type="text" id="hostname" name="hostname" placeholder="IP/hostname" required/><br />
+<form class="homey-form">
+    <div class="homey-form-group">
+        <label class="homey-form-label" for="hostname">Hostname/IP address</label>
+        <input class="homey-form-input" type="text" id="hostname" name="hostname" placeholder="IP/hostname" required />
+    </div>
 
-<label for="port">Port</label>
-<input type="text" id="port" name="port" placeholder="Port" required/><br /><br />
+    <div class="homey-form-group">
+        <label class="homey-form-label" for="port">Port</label>
+        <input class="homey-form-input" type="text" id="port" name="port" placeholder="Port" required />
+    </div>
 
-<button type="button" onclick="doSubmit()">Save</button>
+    <button type="button" class="homey-button-primary" onclick="doSubmit()">Save</button>
+</form>

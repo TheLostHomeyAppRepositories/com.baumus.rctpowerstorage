@@ -81,6 +81,13 @@
         "measure_battery",
         "battery_modus"
       ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "title": {
+            "en": "AC Inverter Output"
+          }
+        }
+      },
       "energy": {
         "batteries": [
           "INTERNAL"
@@ -193,7 +200,7 @@
     "battery_power": {
       "type": "number",
       "title": {
-        "en": "Battery charging"
+        "en": "Battery Charge"
       },
       "uiComponent": "sensor",
       "getable": true,
@@ -221,7 +228,7 @@
     "load_household": {
       "type": "number",
       "title": {
-        "en": "Load household"
+        "en": "Total Usage"
       },
       "uiComponent": "sensor",
       "getable": true,

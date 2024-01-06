@@ -12,6 +12,9 @@
     "measure_battery",
     "battery_modus"
   ],
+  "capabilitiesOptions": {
+    "measure_power": { "title": { "en": "AC Inverter Output" } }
+  },
   "energy": {
     "batteries": [
       "INTERNAL"

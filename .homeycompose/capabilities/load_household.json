@@ -1,7 +1,7 @@
 {
     "type": "number",
     "title": {
-      "en": "Load household"
+      "en": "Total Usage"
     },
     "uiComponent": "sensor",
     "getable": true,
