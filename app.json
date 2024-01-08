@@ -24,7 +24,8 @@
     "xlarge": "/assets/images/xlarge.png"
   },
   "author": {
-    "name": "Robin Baum"
+    "name": "Robin Baum",
+    "email": "robinbaum@web.de"
   },
   "contributing": {
     "donate": {
@@ -33,10 +34,6 @@
       }
     }
   },
-  "bugs": {
-    "url": "https://github.com/Baumus/com.baumus.rctpowerstorage/issues"
-  },
-  "source": "https://github.com/Baumus/com.baumus.rctpowerstorage",
   "flow": {
     "triggers": [
       {
