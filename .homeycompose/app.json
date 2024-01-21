@@ -1,6 +1,6 @@
 {
   "id": "com.baumus.rctpowerstorage",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -35,5 +35,5 @@
   "bugs": {
     "url": "https://github.com/Baumus/com.baumus.rctpowerstorage/issues"
   },
-  "source" : "https://github.com/Baumus/com.baumus.rctpowerstorage"
+  "source": "https://github.com/Baumus/com.baumus.rctpowerstorage"
 }
