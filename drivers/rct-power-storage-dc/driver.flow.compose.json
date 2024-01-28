@@ -2,6 +2,7 @@
   "triggers": [
     {
       "id": "the-soc-has-changed",
+      "deprecated": true,
       "title": {
         "en": "The SOC has changed"
       },

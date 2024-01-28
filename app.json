@@ -12,7 +12,7 @@
     "en": "RCT Power Storage DC"
   },
   "description": {
-    "en": "Effortlessly monitor your RCT Power Storage DC and automate actions with flow cards based on battery charge and inverter output."
+    "en": "Effortlessly monitor your RCT Power Storage DC."
   },
   "category": [
     "energy"
@@ -41,6 +41,7 @@
     "triggers": [
       {
         "id": "the-soc-has-changed",
+        "deprecated": true,
         "title": {
           "en": "The SOC has changed"
         },
