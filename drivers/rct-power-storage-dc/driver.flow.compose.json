@@ -21,6 +21,43 @@
           }
         }
       ]
+    },
+    {
+      "id": "measure_power_changed",
+      "highlight": true,
+      "title": {
+        "en": "The Inverter Output has changed",
+        "nl": "Het vermogen is veranderd",
+        "de": "Die AC-Wechselrichter Leistung hat sich geändert",
+        "fr": "La sortie de l'onduleur a changé",
+        "it": "L'uscita dell'inverter è cambiata",
+        "sv": "Växelriktarens utgång har ändrats",
+        "no": "Inverterens utgang har endret seg",
+        "es": "La salida del inversor ha cambiado",
+        "da": "Inverterens udgang er ændret",
+        "ru": "Выход инвертора изменился",
+        "pl": "Wyjście przekształtnika uległo zmianie"
+      },
+      "tokens": [
+        {
+          "name": "measure_power",
+          "title": {
+            "en": "Power",
+            "nl": "Vermogen",
+            "de": "Leistung",
+            "fr": "Puissance",
+            "it": "Potenza",
+            "sv": "Effekt",
+            "no": "Effekt",
+            "es": "Potencia",
+            "da": "Effekt",
+            "ru": "Электроэнергия",
+            "pl": "Moc"
+          },
+          "type": "number",
+          "example": 7.5
+        }
+      ]
     }
   ]
 }

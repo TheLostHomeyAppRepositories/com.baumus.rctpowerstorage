@@ -1,14 +1,26 @@
 {
     "type": "number",
     "title": {
-      "en": "Total Solar Power"
-    },
+      "en": "Total Solar Power",
+      "nl": "Totaal Zonne-energie",
+      "de": "Solarenergie",
+      "fr": "Puissance Solaire Totale",
+      "it": "Potenza Solare Totale",
+      "sv": "Total Solkraft",
+      "no": "Total Solenergi",
+      "es": "Energía Solar Total",
+      "da": "Samlet Solenergi",
+      "ru": "Общая Солнечная Энергия",
+      "pl": "Całkowita Moc Słoneczna"
+    },    
     "uiComponent": "sensor",
     "getable": true,
     "setable": false,
     "units": {
       "en": "W"
     },
+    "insights": true,
+    "chartType": "stepLine",
     "decimals": 0,
     "icon": "/assets/solar-panel.svg"
   }

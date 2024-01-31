@@ -67,6 +67,50 @@
             "filter": "driver_id=rct-power-storage-dc"
           }
         ]
+      },
+      {
+        "id": "measure_power_changed",
+        "highlight": true,
+        "title": {
+          "en": "The Inverter Output has changed",
+          "nl": "Het vermogen is veranderd",
+          "de": "Die AC-Wechselrichter Leistung hat sich geändert",
+          "fr": "La sortie de l'onduleur a changé",
+          "it": "L'uscita dell'inverter è cambiata",
+          "sv": "Växelriktarens utgång har ändrats",
+          "no": "Inverterens utgang har endret seg",
+          "es": "La salida del inversor ha cambiado",
+          "da": "Inverterens udgang er ændret",
+          "ru": "Выход инвертора изменился",
+          "pl": "Wyjście przekształtnika uległo zmianie"
+        },
+        "tokens": [
+          {
+            "name": "measure_power",
+            "title": {
+              "en": "Power",
+              "nl": "Vermogen",
+              "de": "Leistung",
+              "fr": "Puissance",
+              "it": "Potenza",
+              "sv": "Effekt",
+              "no": "Effekt",
+              "es": "Potencia",
+              "da": "Effekt",
+              "ru": "Электроэнергия",
+              "pl": "Moc"
+            },
+            "type": "number",
+            "example": 7.5
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=rct-power-storage-dc"
+          }
+        ]
       }
     ]
   },
@@ -88,7 +132,17 @@
       "capabilitiesOptions": {
         "measure_power": {
           "title": {
-            "en": "AC Inverter Output"
+            "en": "AC Inverter Output",
+            "nl": "AC Omvormer Uitgang",
+            "de": "AC-Wechselrichter",
+            "fr": "Sortie d'Onduleur AC",
+            "it": "Uscita Inverter AC",
+            "sv": "AC Inverter Utgång",
+            "no": "AC Inverter Utgang",
+            "es": "Salida del Inversor AC",
+            "da": "AC Inverter Udgang",
+            "ru": "Выход Инвертора AC",
+            "pl": "Wyjście Przetwornicy AC"
           }
         }
       },
@@ -204,7 +258,17 @@
     "battery_power": {
       "type": "number",
       "title": {
-        "en": "Battery Charge"
+        "en": "Battery Charge",
+        "nl": "Batterijlading",
+        "de": "Batterie laden",
+        "fr": "Charge de Batterie",
+        "it": "Carica della Batteria",
+        "sv": "Batteriladdning",
+        "no": "Batterilading",
+        "es": "Carga de la Batería",
+        "da": "Batteriopladning",
+        "ru": "Заряд Батареи",
+        "pl": "Ładowanie Baterii"
       },
       "uiComponent": "sensor",
       "getable": true,
@@ -212,6 +276,8 @@
       "units": {
         "en": "W"
       },
+      "insights": true,
+      "chartType": "stepLine",
       "decimals": 0,
       "icon": "/assets/charging.svg"
     },
@@ -232,7 +298,17 @@
     "load_household": {
       "type": "number",
       "title": {
-        "en": "Total Usage"
+        "en": "Total Usage",
+        "nl": "Totaal Verbruik",
+        "de": "Gesamtverbrauch",
+        "fr": "Usage Total",
+        "it": "Consumo Totale",
+        "sv": "Total Användning",
+        "no": "Totalt Forbruk",
+        "es": "Uso Total",
+        "da": "Total Forbrug",
+        "ru": "Общее Потребление",
+        "pl": "Całkowite Zużycie"
       },
       "uiComponent": "sensor",
       "getable": true,
@@ -240,13 +316,25 @@
       "units": {
         "en": "W"
       },
+      "insights": true,
+      "chartType": "stepLine",
       "decimals": 0,
       "icon": "/assets/energy.svg"
     },
     "solar_power": {
       "type": "number",
       "title": {
-        "en": "Total Solar Power"
+        "en": "Total Solar Power",
+        "nl": "Totaal Zonne-energie",
+        "de": "Solarenergie",
+        "fr": "Puissance Solaire Totale",
+        "it": "Potenza Solare Totale",
+        "sv": "Total Solkraft",
+        "no": "Total Solenergi",
+        "es": "Energía Solar Total",
+        "da": "Samlet Solenergi",
+        "ru": "Общая Солнечная Энергия",
+        "pl": "Całkowita Moc Słoneczna"
       },
       "uiComponent": "sensor",
       "getable": true,
@@ -254,13 +342,25 @@
       "units": {
         "en": "W"
       },
+      "insights": true,
+      "chartType": "stepLine",
       "decimals": 0,
       "icon": "/assets/solar-panel.svg"
     },
     "total_grid_power": {
       "type": "number",
       "title": {
-        "en": "Total Grid Power"
+        "en": "Total Grid Power",
+        "nl": "Totaal Netstroom",
+        "de": "Netzleistung",
+        "fr": "Puissance Totale du Réseau",
+        "it": "Potenza Totale della Rete",
+        "sv": "Total Nätverkskraft",
+        "no": "Total Nettstrøm",
+        "es": "Potencia Total de la Red",
+        "da": "Samlet Netværkskraft",
+        "ru": "Общая Мощность Сети",
+        "pl": "Całkowita Moc Sieci"
       },
       "uiComponent": "sensor",
       "getable": true,
@@ -268,6 +368,8 @@
       "units": {
         "en": "W"
       },
+      "insights": true,
+      "chartType": "stepLine",
       "decimals": 0,
       "icon": "/assets/electric-tower.svg"
     }

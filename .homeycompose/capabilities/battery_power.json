@@ -1,7 +1,17 @@
 {
     "type": "number",
     "title": {
-      "en": "Battery Charge"
+      "en": "Battery Charge",
+      "nl": "Batterijlading",
+      "de": "Batterie laden",
+      "fr": "Charge de Batterie",
+      "it": "Carica della Batteria",
+      "sv": "Batteriladdning",
+      "no": "Batterilading",
+      "es": "Carga de la Batería",
+      "da": "Batteriopladning",
+      "ru": "Заряд Батареи",
+      "pl": "Ładowanie Baterii"
     },
     "uiComponent": "sensor",
     "getable": true,
@@ -9,6 +19,8 @@
     "units": {
       "en": "W"
     },
+    "insights": true,
+    "chartType": "stepLine",
     "decimals": 0,
     "icon": "/assets/charging.svg"
     }

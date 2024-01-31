@@ -1,14 +1,26 @@
 {
     "type": "number",
     "title": {
-      "en": "Total Usage"
-    },
+      "en": "Total Usage",
+      "nl": "Totaal Verbruik",
+      "de": "Gesamtverbrauch",
+      "fr": "Usage Total",
+      "it": "Consumo Totale",
+      "sv": "Total Användning",
+      "no": "Totalt Forbruk",
+      "es": "Uso Total",
+      "da": "Total Forbrug",
+      "ru": "Общее Потребление",
+      "pl": "Całkowite Zużycie"
+    },    
     "uiComponent": "sensor",
     "getable": true,
     "setable": false,
     "units": {
       "en": "W"
     },
+    "insights": true,
+    "chartType": "stepLine",
     "decimals": 0,
     "icon": "/assets/energy.svg"
   }

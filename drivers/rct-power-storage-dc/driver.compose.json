@@ -13,7 +13,21 @@
     "battery_modus"
   ],
   "capabilitiesOptions": {
-    "measure_power": { "title": { "en": "AC Inverter Output" } }
+    "measure_power": { 
+      "title": { 
+        "en": "AC Inverter Output",
+        "nl": "AC Omvormer Uitgang",
+        "de": "AC-Wechselrichter",
+        "fr": "Sortie d'Onduleur AC",
+        "it": "Uscita Inverter AC",
+        "sv": "AC Inverter Utgång",
+        "no": "AC Inverter Utgang",
+        "es": "Salida del Inversor AC",
+        "da": "AC Inverter Udgang",
+        "ru": "Выход Инвертора AC",
+        "pl": "Wyjście Przetwornicy AC" 
+      }    
+    }
   },
   "energy": {
     "batteries": [

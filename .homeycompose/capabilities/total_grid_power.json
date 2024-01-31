@@ -1,14 +1,27 @@
 {
     "type": "number",
     "title": {
-      "en": "Total Grid Power"
-    },
+      "en": "Total Grid Power",
+      "nl": "Totaal Netstroom",
+      "de": "Netzleistung",
+      "fr": "Puissance Totale du Réseau",
+      "it": "Potenza Totale della Rete",
+      "sv": "Total Nätverkskraft",
+      "no": "Total Nettstrøm",
+      "es": "Potencia Total de la Red",
+      "da": "Samlet Netværkskraft",
+      "ru": "Общая Мощность Сети",
+      "pl": "Całkowita Moc Sieci"
+    }
+    ,    
     "uiComponent": "sensor",
     "getable": true,
     "setable": false,
     "units": {
       "en": "W"
     },
+    "insights": true,
+    "chartType": "stepLine",
     "decimals": 0,
     "icon": "/assets/electric-tower.svg"
   }
