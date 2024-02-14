@@ -1,10 +1,30 @@
 {
   "title": {
-    "en": "Solar Power greater than"
+    "en": "Solar Power greater than",
+    "nl": "Zonne-energie groter dan",
+    "de": "Solarenergie größer als",
+    "fr": "Puissance solaire supérieure à",
+    "it": "Potenza solare maggiore di",
+    "sv": "Solenergi större än",
+    "no": "Solenergi større enn",
+    "es": "Potencia solar mayor que",
+    "da": "Solenergi større end",
+    "ru": "Солнечная энергия больше, чем",
+    "pl": "Moc solarna większa niż"
   },
   "titleFormatted": {
-    "en": "Solar Power greater than [[Watt]]W"
-  },
+    "en": "Solar Power greater than [[Watt]]W",
+    "nl": "Zonne-energie groter dan [[Watt]]W",
+    "de": "Solarenergie größer als [[Watt]]W",
+    "fr": "Puissance solaire supérieure à [[Watt]]W",
+    "it": "Potenza solare maggiore di [[Watt]]W",
+    "sv": "Solenergi större än [[Watt]]W",
+    "no": "Solenergi større enn [[Watt]]W",
+    "es": "Potencia solar mayor que [[Watt]]W",
+    "da": "Solenergi større end [[Watt]]W",
+    "ru": "Солнечная энергия больше, чем [[Watt]]W",
+    "pl": "Moc solarna większa niż [[Watt]]W"
+  },  
   "args": [
     {
       "type": "number",

@@ -41,16 +41,48 @@
     "conditions": [
       {
         "title": {
-          "en": "battery level is greater than"
+          "en": "Battery Level is greater than",
+          "nl": "Batterijniveau is hoger dan",
+          "de": "Batterieladestand ist größer als",
+          "fr": "Le niveau de la batterie est supérieur à",
+          "it": "Il livello della batteria è maggiore di",
+          "sv": "Batterinivån är större än",
+          "no": "Batterinivået er større enn",
+          "es": "El nivel de la batería es mayor que",
+          "da": "Batteriniveauet er større end",
+          "ru": "Уровень заряда батареи больше, чем",
+          "pl": "Poziom baterii jest większy niż"
         },
         "titleFormatted": {
-          "en": "battery level is greater than [[level]]%"
+          "en": "Battery Level is greater than [[level]]",
+          "nl": "Batterijniveau is hoger dan [[level]]",
+          "de": "Batterieladestand ist größer als [[level]]",
+          "fr": "Le niveau de la batterie est supérieur à [[level]]",
+          "it": "Il livello della batteria è maggiore di [[level]]",
+          "sv": "Batterinivån är större än [[level]]",
+          "no": "Batterinivået er større enn [[level]]",
+          "es": "El nivel de la batería es mayor que [[level]]",
+          "da": "Batteriniveauet er større end [[level]]",
+          "ru": "Уровень заряда батареи больше, чем [[level]]",
+          "pl": "Poziom baterii jest większy niż [[level]]"
         },
         "args": [
           {
             "type": "range",
             "name": "level",
-            "title": "Battery level",
+            "title": {
+              "en": "Battery Level",
+              "nl": "Batterijniveau",
+              "de": "Batterieladestand",
+              "fr": "Niveau de Batterie",
+              "it": "Livello della Batteria",
+              "sv": "Batterinivå",
+              "no": "Batterinivå",
+              "es": "Nivel de Batería",
+              "da": "Batteriniveau",
+              "ru": "Уровень Заряда Батареи",
+              "pl": "Poziom Baterii"
+            },
             "min": 0,
             "max": 1,
             "step": 0.01,
@@ -63,10 +95,30 @@
       },
       {
         "title": {
-          "en": "Solar Power greater than"
+          "en": "Solar Power greater than",
+          "nl": "Zonne-energie groter dan",
+          "de": "Solarenergie größer als",
+          "fr": "Puissance solaire supérieure à",
+          "it": "Potenza solare maggiore di",
+          "sv": "Solenergi större än",
+          "no": "Solenergi større enn",
+          "es": "Potencia solar mayor que",
+          "da": "Solenergi større end",
+          "ru": "Солнечная энергия больше, чем",
+          "pl": "Moc solarna większa niż"
         },
         "titleFormatted": {
-          "en": "Solar Power greater than [[Watt]]W"
+          "en": "Solar Power greater than [[Watt]]W",
+          "nl": "Zonne-energie groter dan [[Watt]]W",
+          "de": "Solarenergie größer als [[Watt]]W",
+          "fr": "Puissance solaire supérieure à [[Watt]]W",
+          "it": "Potenza solare maggiore di [[Watt]]W",
+          "sv": "Solenergi större än [[Watt]]W",
+          "no": "Solenergi større enn [[Watt]]W",
+          "es": "Potencia solar mayor que [[Watt]]W",
+          "da": "Solenergi større end [[Watt]]W",
+          "ru": "Солнечная энергия больше, чем [[Watt]]W",
+          "pl": "Moc solarna większa niż [[Watt]]W"
         },
         "args": [
           {
