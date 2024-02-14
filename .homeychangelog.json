@@ -13,5 +13,8 @@
   },
   "1.2.0": {
     "en": "Added conditional flow cards"
+  },
+  "1.2.1": {
+    "en": "Fixed battery-level-is-greater-than condition card"
   }
 }
