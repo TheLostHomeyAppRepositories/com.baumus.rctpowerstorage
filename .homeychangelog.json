@@ -10,5 +10,8 @@
   },
   "1.1.0": {
     "en": "Improved translations and additional insights"
+  },
+  "1.2.0": {
+    "en": "Added conditional flow cards"
   }
 }
