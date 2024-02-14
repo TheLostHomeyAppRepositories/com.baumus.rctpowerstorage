@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "Solar Power greater than"
+  },
+  "titleFormatted": {
+    "en": "Solar Power greater than [[Watt]]W"
+  },
+  "args": [
+    {
+      "type": "number",
+      "name": "Watt",
+      "placeholder": {
+        "en": "100"
+      },
+      "min": 0,
+      "max": 10000,
+      "step": 1
+    }
+  ]
+}

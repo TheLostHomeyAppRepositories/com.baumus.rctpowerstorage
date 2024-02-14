@@ -38,6 +38,51 @@
   },
   "source": "https://github.com/Baumus/com.baumus.rctpowerstorage",
   "flow": {
+    "conditions": [
+      {
+        "title": {
+          "en": "battery level is greater than"
+        },
+        "titleFormatted": {
+          "en": "battery level is greater than [[level]]%"
+        },
+        "args": [
+          {
+            "type": "range",
+            "name": "level",
+            "title": "Battery level",
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "label": "%",
+            "labelMultiplier": 100,
+            "labelDecimals": 0
+          }
+        ],
+        "id": "battery-level-is-greater-than"
+      },
+      {
+        "title": {
+          "en": "Solar Power greater than"
+        },
+        "titleFormatted": {
+          "en": "Solar Power greater than [[Watt]]W"
+        },
+        "args": [
+          {
+            "type": "number",
+            "name": "Watt",
+            "placeholder": {
+              "en": "100"
+            },
+            "min": 0,
+            "max": 10000,
+            "step": 1
+          }
+        ],
+        "id": "solar-power-greater-than"
+      }
+    ],
     "triggers": [
       {
         "id": "the-soc-has-changed",
@@ -132,17 +177,17 @@
       "capabilitiesOptions": {
         "measure_power": {
           "title": {
-            "en": "AC Inverter Output",
-            "nl": "AC Omvormer Uitgang",
-            "de": "AC-Wechselrichter",
-            "fr": "Sortie d'Onduleur AC",
-            "it": "Uscita Inverter AC",
-            "sv": "AC Inverter Utgång",
-            "no": "AC Inverter Utgang",
-            "es": "Salida del Inversor AC",
-            "da": "AC Inverter Udgang",
-            "ru": "Выход Инвертора AC",
-            "pl": "Wyjście Przetwornicy AC"
+            "en": "Inverter Power",
+            "nl": "Omvormer Vermogen",
+            "de": "Inverterleistung",
+            "fr": "Puissance Inverter",
+            "it": "Potenza Inverter",
+            "sv": "Inverter Effekt",
+            "no": "Inverter Effekt",
+            "es": "Potencia Inversor",
+            "da": "Invertereffekt",
+            "ru": "Мощность Инвертора",
+            "pl": "Moc Inwertera"
           }
         }
       },
@@ -258,17 +303,17 @@
     "battery_power": {
       "type": "number",
       "title": {
-        "en": "Battery Charge",
-        "nl": "Batterijlading",
-        "de": "Batterie laden",
-        "fr": "Charge de Batterie",
-        "it": "Carica della Batteria",
-        "sv": "Batteriladdning",
-        "no": "Batterilading",
-        "es": "Carga de la Batería",
-        "da": "Batteriopladning",
-        "ru": "Заряд Батареи",
-        "pl": "Ładowanie Baterii"
+        "en": "Battery Power",
+        "nl": "Batterijvermogen",
+        "de": "Batterieleistung",
+        "fr": "Puissance Batterie",
+        "it": "Potenza Batteria",
+        "sv": "Batterikraft",
+        "no": "Batterieffekt",
+        "es": "Potencia Batería",
+        "da": "Batterikraft",
+        "ru": "Мощность Батареи",
+        "pl": "Moc Baterii"
       },
       "uiComponent": "sensor",
       "getable": true,
@@ -298,17 +343,17 @@
     "load_household": {
       "type": "number",
       "title": {
-        "en": "Total Usage",
-        "nl": "Totaal Verbruik",
-        "de": "Gesamtverbrauch",
-        "fr": "Usage Total",
-        "it": "Consumo Totale",
-        "sv": "Total Användning",
-        "no": "Totalt Forbruk",
-        "es": "Uso Total",
-        "da": "Total Forbrug",
-        "ru": "Общее Потребление",
-        "pl": "Całkowite Zużycie"
+        "en": "Power Usage",
+        "nl": "Stroomverbruik",
+        "de": "Stromverbrauch",
+        "fr": "Consommation Électrique",
+        "it": "Consumo Elettrico",
+        "sv": "Energiförbrukning",
+        "no": "Strømforbruk",
+        "es": "Consumo de Energía",
+        "da": "Energiforbrug",
+        "ru": "Потребление Энергии",
+        "pl": "Zużycie Energii"
       },
       "uiComponent": "sensor",
       "getable": true,
@@ -324,17 +369,17 @@
     "solar_power": {
       "type": "number",
       "title": {
-        "en": "Total Solar Power",
-        "nl": "Totaal Zonne-energie",
+        "en": "Solar Power",
+        "nl": "Zonne-energie",
         "de": "Solarenergie",
-        "fr": "Puissance Solaire Totale",
-        "it": "Potenza Solare Totale",
-        "sv": "Total Solkraft",
-        "no": "Total Solenergi",
-        "es": "Energía Solar Total",
-        "da": "Samlet Solenergi",
-        "ru": "Общая Солнечная Энергия",
-        "pl": "Całkowita Moc Słoneczna"
+        "fr": "Puissance Solaire",
+        "it": "Potenza Solare",
+        "sv": "Solkraft",
+        "no": "Solenergi",
+        "es": "Energía Solar",
+        "da": "Solenergi",
+        "ru": "Солнечная Энергия",
+        "pl": "Moc Słoneczna"
       },
       "uiComponent": "sensor",
       "getable": true,
@@ -350,17 +395,17 @@
     "total_grid_power": {
       "type": "number",
       "title": {
-        "en": "Total Grid Power",
-        "nl": "Totaal Netstroom",
+        "en": "Grid Power",
+        "nl": "Netstroom",
         "de": "Netzleistung",
-        "fr": "Puissance Totale du Réseau",
-        "it": "Potenza Totale della Rete",
-        "sv": "Total Nätverkskraft",
-        "no": "Total Nettstrøm",
-        "es": "Potencia Total de la Red",
-        "da": "Samlet Netværkskraft",
-        "ru": "Общая Мощность Сети",
-        "pl": "Całkowita Moc Sieci"
+        "fr": "Puissance du Réseau",
+        "it": "Potenza della Rete",
+        "sv": "Nätverkskraft",
+        "no": "Nettstrøm",
+        "es": "Potencia de la Red",
+        "da": "Netværkskraft",
+        "ru": "Мощность Сети",
+        "pl": "Moc Sieci"
       },
       "uiComponent": "sensor",
       "getable": true,

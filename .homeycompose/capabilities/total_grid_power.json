@@ -1,19 +1,18 @@
 {
     "type": "number",
     "title": {
-      "en": "Total Grid Power",
-      "nl": "Totaal Netstroom",
+      "en": "Grid Power",
+      "nl": "Netstroom",
       "de": "Netzleistung",
-      "fr": "Puissance Totale du Réseau",
-      "it": "Potenza Totale della Rete",
-      "sv": "Total Nätverkskraft",
-      "no": "Total Nettstrøm",
-      "es": "Potencia Total de la Red",
-      "da": "Samlet Netværkskraft",
-      "ru": "Общая Мощность Сети",
-      "pl": "Całkowita Moc Sieci"
-    }
-    ,    
+      "fr": "Puissance du Réseau",
+      "it": "Potenza della Rete",
+      "sv": "Nätverkskraft",
+      "no": "Nettstrøm",
+      "es": "Potencia de la Red",
+      "da": "Netværkskraft",
+      "ru": "Мощность Сети",
+      "pl": "Moc Sieci"
+    },    
     "uiComponent": "sensor",
     "getable": true,
     "setable": false,

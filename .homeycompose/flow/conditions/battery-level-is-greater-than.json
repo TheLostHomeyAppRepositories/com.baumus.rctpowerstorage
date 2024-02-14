@@ -1,0 +1,21 @@
+{
+  "title": {
+    "en": "battery level is greater than"
+  },
+  "titleFormatted": {
+    "en": "battery level is greater than [[level]]"
+  },
+  "args": [
+    {
+      "type": "range",
+      "name": "level",
+      "title": "Battery level",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "label": "%",
+      "labelMultiplier": 100,
+      "labelDecimals": 0
+    }
+  ]
+}

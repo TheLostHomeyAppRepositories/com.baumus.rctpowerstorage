@@ -12,6 +12,18 @@ class MyDriver extends Driver {
   async onInit() {
     this.log('MyDriver has been initialized');
     this._socChangedTrigger = this.homey.flow.getDeviceTriggerCard("the-soc-has-changed");
+
+    // Register the solar-power-greater-than condition card
+    this.homey.flow.getConditionCard("solar-power-greater-than")
+      .registerRunListener((args, state) => {
+        return args.device.getCapabilityValue("solar_power") > args.Watt;
+      });
+
+    // Register the battery-level-greater-than condition card
+    this.homey.flow.getConditionCard("battery-level-greater-than")
+      .registerRunListener((args, state) => {
+        return args.device.getCapabilityValue("measure_battery") > args.level;
+      });
   }
   
   triggerSOCChanged(device, tokens, state) {
