@@ -20,10 +20,11 @@ class MyDriver extends Driver {
       });
 
     // Register the battery-level-greater-than condition card
-    this.homey.flow.getConditionCard("battery-level-greater-than")
+    this.homey.flow.getConditionCard("battery-level-is-greater-than")
       .registerRunListener((args, state) => {
         return args.device.getCapabilityValue("measure_battery") > args.level;
       });
+
   }
   
   triggerSOCChanged(device, tokens, state) {
