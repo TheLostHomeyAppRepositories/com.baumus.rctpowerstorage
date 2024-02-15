@@ -59,5 +59,113 @@
         }
       ]
     }
+  ],
+  "conditions": [
+    {
+      "id": "battery-level-greater-than",
+      "title": {
+        "en": "Battery Level !{{greater|less}} than",
+        "nl": "Batterijniveau !{{hoger|lager}} dan",
+        "de": "Batterieladestand !{{größer|kleiner}} als",
+        "fr": "Niveau de la batterie !{{supérieur|inférieur}} à",
+        "it": "Livello della batteria !{{maggiore|minore}} di",
+        "sv": "Batterinivån är !{{större|mindre}} än",
+        "no": "Batterinivået er !{{større|mindre}} enn",
+        "es": "Nivel de la batería !{{mayor|menor}} que",
+        "da": "Batteriniveauet er !{{større|mindre}} end",
+        "ru": "Уровень заряда батареи !{{больше|меньше}}, чем",
+        "pl": "Poziom baterii jest !{{większy|mniejszy}} niż"
+      },
+      "titleFormatted": {
+        "en": "Battery Level !{{greater|less}} than [[SOC]]",
+        "nl": "Batterijniveau !{{hoger|lager}} dan [[SOC]]",
+        "de": "Batterieladestand !{{größer|kleiner}} als [[SOC]]",
+        "fr": "Niveau de la batterie !{{supérieur|inférieur}} à [[SOC]]",
+        "it": "Livello della batteria !{{maggiore|minore}} di [[SOC]]",
+        "sv": "Batterinivån är !{{större|mindre}} än [[SOC]]",
+        "no": "Batterinivået er !{{større|mindre}} enn [[SOC]]",
+        "es": "Nivel de la batería !{{mayor|menor}} que [[SOC]]",
+        "da": "Batteriniveauet er !{{større|mindre}} end [[SOC]]",
+        "ru": "Уровень заряда батареи !{{больше|меньше}}, чем [[SOC]]",
+        "pl": "Poziom baterii jest !{{większy|mniejszy}} niż [[SOC]]"
+      },        
+      "args": [
+        {
+          "type": "range",
+          "name": "SOC",
+          "title": {
+            "en": "Battery Level",
+            "nl": "Batterijniveau",
+            "de": "Batterieladestand",
+            "fr": "Niveau de Batterie",
+            "it": "Livello della Batteria",
+            "sv": "Batterinivå",
+            "no": "Batterinivå",
+            "es": "Nivel de Batería",
+            "da": "Batteriniveau",
+            "ru": "Уровень Заряда Батареи",
+            "pl": "Poziom Baterii"
+          },      
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "label": "%"
+        }
+      ]
+    },
+    {
+      "id": "solar-power-greater-than",
+      "title": {
+        "en": "Solar Power !{{greater|less}} than",
+        "nl": "Zonne-energie !{{groter|kleiner}} dan",
+        "de": "Solarenergie !{{größer|kleiner}} als",
+        "fr": "Puissance solaire !{{supérieure|inférieure}} à",
+        "it": "Potenza solare !{{maggiore|minore}} di",
+        "sv": "Solenergi !{{större|mindre}} än",
+        "no": "Solenergi !{{større|mindre}} enn",
+        "es": "Potencia solar !{{mayor|menor}} que",
+        "da": "Solenergi !{{større|mindre}} end",
+        "ru": "Солнечная энергия !{{больше|меньше}}, чем",
+        "pl": "Moc solarna !{{większa|mniejsza}} niż"
+      },
+      "titleFormatted": {
+        "en": "Solar Power !{{greater|less}} than [[Watt]]W",
+        "nl": "Zonne-energie !{{groter|kleiner}} dan [[Watt]]W",
+        "de": "Solarenergie !{{größer|kleiner}} als [[Watt]]W",
+        "fr": "Puissance solaire !{{supérieure|inférieure}} à [[Watt]]W",
+        "it": "Potenza solare !{{maggiore|minore}} di [[Watt]]W",
+        "sv": "Solenergi !{{större|mindre}} än [[Watt]]W",
+        "no": "Solenergi !{{større|mindre}} enn [[Watt]]W",
+        "es": "Potencia solar !{{mayor|menor}} que [[Watt]]W",
+        "da": "Solenergi !{{større|mindre}} end [[Watt]]W",
+        "ru": "Солнечная энергия !{{больше|меньше}}, чем [[Watt]]Вт",
+        "pl": "Moc solarna !{{większa|mniejsza}} niż [[Watt]]W"
+      },  
+      "args": [
+        {
+          "type": "number",
+          "name": "Watt",
+          "title": {        
+            "en": "Solar Power (W)",
+            "nl": "Zonne-energie (W)",
+            "de": "Solarenergie (W)",
+            "fr": "Puissance solaire (W)",
+            "it": "Potenza solare (W)",
+            "sv": "Solenergi (W)",
+            "no": "Solenergi (W)",
+            "es": "Potencia solar (W)",
+            "da": "Solenergi (W)",
+            "ru": "Солнечная энергия (Вт)",
+            "pl": "Moc solarna (W)"
+          },
+          "placeholder": {
+            "en": "100"
+          },
+          "min": 0,
+          "max": 10000,
+          "step": 1
+        }
+      ]
+    }
   ]
 }
