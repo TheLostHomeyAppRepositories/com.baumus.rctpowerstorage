@@ -19,5 +19,8 @@
   },
   "1.2.2": {
     "en": "Fixed conditional flow cards"
+  },
+  "1.2.3": {
+    "en": "Updated submodule rctjavalib"
   }
 }
