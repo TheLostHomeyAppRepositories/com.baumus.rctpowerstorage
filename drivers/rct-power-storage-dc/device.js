@@ -11,6 +11,7 @@ class MyDevice extends Device {
    */
   async onInit() {
     this.log('MyDevice has been initialized');
+    this.setAvailable();
 
     // Error handling for connection errors
     try {
