@@ -25,5 +25,8 @@
   },
   "1.2.4": {
     "en": "Added: Default port during device initialization dialogue"
+  },
+  "1.3.0": {
+    "en": "added: Battery Module serial number and health status"
   }
 }
