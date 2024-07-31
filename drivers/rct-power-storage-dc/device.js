@@ -25,11 +25,49 @@ class MyDevice extends Device {
       const bvoltage = await conn.queryFloat32(Identifier.BATTERY_VOLTAGE);
       const roundedCapacity = (Math.round(bcapacity * bvoltage / 1000 * 10) / 10).toFixed(1);
 
+      // Query Battery Module Health
+      const bm0_Umax = await conn.queryFloat32(Identifier.BATTERY_MODULE_0_UMAX);
+      const bm0_Umin = await conn.queryFloat32(Identifier.BATTERY_MODULE_0_UMIN);
+      const bm0_serial = await conn.queryString(Identifier.BATTERY_MODULE_0_SERIAL);
+      const bm1_Umax = await conn.queryFloat32(Identifier.BATTERY_MODULE_1_UMAX);
+      const bm1_Umin = await conn.queryFloat32(Identifier.BATTERY_MODULE_1_UMIN);
+      const bm1_serial = await conn.queryString(Identifier.BATTERY_MODULE_1_SERIAL);
+      const bm2_Umax = await conn.queryFloat32(Identifier.BATTERY_MODULE_2_UMAX);
+      const bm2_Umin = await conn.queryFloat32(Identifier.BATTERY_MODULE_2_UMIN);
+      const bm2_serial = await conn.queryString(Identifier.BATTERY_MODULE_2_SERIAL);
+      const bm3_Umax = await conn.queryFloat32(Identifier.BATTERY_MODULE_3_UMAX);
+      const bm3_Umin = await conn.queryFloat32(Identifier.BATTERY_MODULE_3_UMIN);
+      const bm3_serial = await conn.queryString(Identifier.BATTERY_MODULE_3_SERIAL);
+      const bm4_Umax = await conn.queryFloat32(Identifier.BATTERY_MODULE_4_UMAX);
+      const bm4_Umin = await conn.queryFloat32(Identifier.BATTERY_MODULE_4_UMIN);
+      const bm4_serial = await conn.queryString(Identifier.BATTERY_MODULE_4_SERIAL);
+      const bm5_Umax = await conn.queryFloat32(Identifier.BATTERY_MODULE_5_UMAX);
+      const bm5_Umin = await conn.queryFloat32(Identifier.BATTERY_MODULE_5_UMIN);
+      const bm5_serial = await conn.queryString(Identifier.BATTERY_MODULE_5_SERIAL);
+      const bm6_Umax = await conn.queryFloat32(Identifier.BATTERY_MODULE_6_UMAX);
+      const bm6_Umin = await conn.queryFloat32(Identifier.BATTERY_MODULE_6_UMIN);
+      const bm6_serial = await conn.queryString(Identifier.BATTERY_MODULE_6_SERIAL);
+
+
       await this.setSettings({
         DeviceId: this.getData().id,
         DeviceIP: this.getStoreValue('address'),
         DevicePort: this.getStoreValue('port'),
-        battery_capacity: roundedCapacity.toString()
+        battery_capacity: roundedCapacity.toString(),
+        battery_module_0_serial: bm0_serial,
+        battery_module_0_health: (bm0_serial === '') ? '' : (bm0_Umax < 3.500 && bm0_Umin >= 3.000) ? 'good' : 'bad',
+        battery_module_1_serial: bm1_serial,
+        battery_module_1_health: (bm1_serial === '') ? '' : (bm1_Umax < 3.500 && bm1_Umin >= 3.000) ? 'good' : 'bad',
+        battery_module_2_serial: bm2_serial,
+        battery_module_2_health: (bm2_serial === '') ? '' : (bm2_Umax < 3.500 && bm2_Umin >= 3.000) ? 'good' : 'bad',
+        battery_module_3_serial: bm3_serial,
+        battery_module_3_health: (bm3_serial === '') ? '' : (bm3_Umax < 3.500 && bm3_Umin >= 3.000) ? 'good' : 'bad',
+        battery_module_4_serial: bm4_serial,
+        battery_module_4_health: (bm4_serial === '') ? '' : (bm4_Umax < 3.500 && bm4_Umin >= 3.000) ? 'good' : 'bad',
+        battery_module_5_serial: bm5_serial,
+        battery_module_5_health: (bm5_serial === '') ? '' : (bm5_Umax < 3.500 && bm5_Umin >= 3.000) ? 'good' : 'bad',
+        battery_module_6_serial: bm6_serial,
+        battery_module_6_health: (bm6_serial == '') ? '' : (bm6_Umax < 3.500 && bm6_Umin >= 3.000) ? 'good' : 'bad'
       });
 
       // Close the connection when done
