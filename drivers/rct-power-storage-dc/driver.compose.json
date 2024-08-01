@@ -65,44 +65,50 @@
   ],
   "settings": [
     {
-      "id": "DeviceId",
-      "type": "label",
-      "value": "",
-      "label": {
-        "en": "Serial Number of the device"
-      }
-    },
-    {
-      "id": "DeviceIP",
-      "type": "label",
-      "value": "",
-      "label": {
-        "en": "IP Address of the device"
-      }
-    },
-    {
-      "id": "DevicePort",
-      "type": "label",
-      "value": "",
-      "label": {
-        "en": "Port of the device"
-      }
-    },
-    {
-      "id": "polling_interval",
-      "type": "number",
-      "value": 20,
-      "label": {
-        "en": "Polling interval in seconds"
-      }
-    },
-    {
-      "id": "battery_capacity",
-      "type": "label",
-      "value": "",
-      "label": {
-        "en": "Battery Capacity in kWh"
-      } 
+      "type": "group",
+      "label": { "en": "RCT Power Storage DC" },
+      "children": [
+        {
+          "id": "DeviceId",
+          "type": "label",
+          "value": "",
+          "label": {
+            "en": "Serial Number"
+          }
+        },
+        {
+          "id": "battery_capacity",
+          "type": "label",
+          "value": "",
+          "label": {
+            "en": "Battery Capacity in kWh"
+          } 
+        },
+        {
+          "id": "DeviceIP",
+          "type": "label",
+          "value": "",
+          "label": {
+            "en": "IP Address"
+          }
+        },
+        {
+          "id": "DevicePort",
+          "type": "label",
+          "value": "",
+          "label": {
+            "en": "Port"
+          }
+        },
+        {
+          "id": "polling_interval",
+          "type": "number",
+          "value": 20,
+          "label": {
+            "en": "Polling interval in seconds"
+          }
+        }
+      ]
     },
     {
       "type": "group",
