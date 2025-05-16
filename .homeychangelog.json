@@ -37,5 +37,8 @@
   },
   "2.0.0": {
     "en": "Added: Flows to manage grid charging"
+  },
+  "2.0.1": {
+    "en": "Fixed: Flow Card - Solar Power Changed"
   }
 }
