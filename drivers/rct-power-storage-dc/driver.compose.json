@@ -10,7 +10,8 @@
     "total_grid_power",
     "load_household",
     "measure_battery",
-    "battery_modus"
+    "battery_modus",
+    "soc_strategy"
   ],
   "capabilitiesOptions": {
     "measure_power": { 
@@ -106,6 +107,171 @@
           "value": 20,
           "label": {
             "en": "Polling interval in seconds"
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "label": { "en": "Grid Charging Management" },
+      "children" : [
+        {
+          "id": "enable_inverter_management",
+          "type": "checkbox",
+          "value": false,
+          "label": {
+            "en": "Enable Grid Charging Management"
+          },
+          "hint": {
+            "en": "USE AT YOUR OWN RISK !!! - Activate features to manage inverter operation by sending commands and writing values to the inverter's memory. You as user are fully responsible for any harm or damage caused. Please feel free to review the source code on GitHub first before activating this feature."
+          }
+       },
+        {
+          "id": "max_grid_charge_power",
+          "type": "number",
+          "value": 6000,
+          "min": 0,
+          "max": 6000,
+          "units": "watts",
+          "label": {
+            "en": "Max Grid Charge Power (W)"
+          },
+          "hint": {
+            "en": "The maximum power in Watt the inverter is allowed to charge the battery from the grid."
+          }
+        },
+        {
+          "id": "default_max_grid_charge_power",
+          "type": "number",
+          "value": 0,
+          "min": 0,
+          "max": 6000,
+          "units": "watts",
+          "label": {
+            "en": "Default Max Grid Charge Power (W)"
+          },
+          "hint": {
+            "en": "Set the default maximum grid charging power in watts. This value will be used when the inverter is reset to standard operations after grid charging. The standard value is 0 watts and should only be changed if you know what you are doing."
+          }
+        },
+        {
+          "id": "default_soc_strategy",
+          "type": "dropdown",
+          "value": "Internal",
+          "label": {
+            "en": "Default SOC Strategy"
+          },
+          "values": [
+            {
+              "id": "SOC",
+                "label": {
+                    "en": "Maintain SOC",
+                    "nl": "SOC behouden",
+                    "de": "SOC halten",
+                    "fr": "Maintenir SOC",
+                    "it": "Mantieni SOC",
+                    "sv": "Behåll SOC",
+                    "no": "Behold SOC",
+                    "es": "Mantener SOC",
+                    "da": "Behold SOC",
+                    "ru": "Поддерживать SOC",
+                    "pl": "Utrzymuj SOC"
+                }
+            },
+            {
+              "id": "Constant",
+              "label": {
+                  "en": "Constant",
+                  "nl": "Constante",
+                  "de": "Konstante",
+                  "fr": "Constante",
+                  "it": "Costante",
+                  "sv": "Konstant",
+                  "no": "Konstant",
+                  "es": "Constante",
+                  "da": "Konstant",
+                  "ru": "Константа",
+                  "pl": "Stała"
+              }
+            },
+            {
+              "id": "External",
+              "label": {
+                  "en": "External",
+                  "nl": "Extern",
+                  "de": "Extern",
+                  "fr": "Externe",
+                  "it": "Esterno",
+                  "sv": "Extern",
+                  "no": "Ekstern",
+                  "es": "Externo",
+                  "da": "Ekstern",
+                  "ru": "Внешний",
+                  "pl": "Zewnętrzny"
+              }
+            },
+            {
+              "id": "Middle Voltage",
+              "label": {
+                  "en": "Middle Voltage",
+                  "nl": "Middenspanning",
+                  "de": "Mittlere Spannung",
+                  "fr": "Tension Moyenne",
+                  "it": "Tensione Media",
+                  "sv": "Mellan Spänning",
+                  "no": "Mellomspenning",
+                  "es": "Voltaje Medio",
+                  "da": "Mellem Spænding",
+                  "ru": "Среднее Напряжение",
+                  "pl": "Średnie Napięcie"
+              }
+            },
+            {
+              "id": "Internal",
+              "label": {
+                  "en": "Internal",
+                  "nl": "Intern",
+                  "de": "Intern",
+                  "fr": "Interne",
+                  "it": "Interno",
+                  "sv": "Intern",
+                  "no": "Intern",
+                  "es": "Interno",
+                  "da": "Intern",
+                  "ru": "Внутренний",
+                  "pl": "Wewnętrzny"
+              }
+            },
+            {
+              "id": "Schedule",
+              "label": {
+                  "en": "Schedule",
+                  "nl": "Schema",
+                  "de": "Zeitplan",
+                  "fr": "Horaire",
+                  "it": "Programma",
+                  "sv": "Schema",
+                  "no": "Timeplan",
+                  "es": "Programa",
+                  "da": "Tidsplan",
+                  "ru": "Расписание",
+                  "pl": "Harmonogram"
+              }
+            }
+          ],
+          "hint": {
+            "en": "Set the default SOC strategy for the inverter. The SOC strategy will be used when the inverter is reset to standard operations after grid charging. The standard value is 'Internal' and should only be changed if you know what you are doing."
+          }
+        },
+        {
+          "id": "default_use_grid_power_enabled",
+          "type": "checkbox",
+          "value": false,
+          "label": {
+            "en": "Default Use Grid Power Enabled"
+          },
+          "hint": {
+            "en": "Set the default value for the 'Use Grid Power' feature. This value will be used when the inverter is reset to standard operations after grid charging. The standard value is 'false' and should only be changed if you know what you are doing."
           }
         }
       ]

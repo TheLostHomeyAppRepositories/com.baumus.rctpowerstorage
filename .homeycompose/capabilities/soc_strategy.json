@@ -1,0 +1,118 @@
+{
+    "type": "enum",
+    "title": {
+        "en": "SOC Strategy",
+        "nl": "SOC Strategie",
+        "de": "SOC Strategie",
+        "fr": "Stratégie SOC",
+        "it": "Strategia SOC",
+        "sv": "SOC Strategi",
+        "no": "SOC Strategi",
+        "es": "Estrategia SOC",
+        "da": "SOC Strategi",
+        "ru": "Стратегия SOC",
+        "pl": "Strategia SOC"
+    },
+    "values": [
+      {
+        "id": "SOC",
+          "title": {
+              "en": "Maintain SOC",
+              "nl": "SOC behouden",
+              "de": "SOC halten",
+              "fr": "Maintenir SOC",
+              "it": "Mantieni SOC",
+              "sv": "Behåll SOC",
+              "no": "Behold SOC",
+              "es": "Mantener SOC",
+              "da": "Behold SOC",
+              "ru": "Поддерживать SOC",
+              "pl": "Utrzymuj SOC"
+          }
+      },
+      {
+        "id": "Constant",
+        "title": {
+            "en": "Constant",
+            "nl": "Constante",
+            "de": "Konstante",
+            "fr": "Constante",
+            "it": "Costante",
+            "sv": "Konstant",
+            "no": "Konstant",
+            "es": "Constante",
+            "da": "Konstant",
+            "ru": "Константа",
+            "pl": "Stała"
+        }
+      },
+      {
+        "id": "External",
+        "title": {
+            "en": "External",
+            "nl": "Extern",
+            "de": "Extern",
+            "fr": "Externe",
+            "it": "Esterno",
+            "sv": "Extern",
+            "no": "Ekstern",
+            "es": "Externo",
+            "da": "Ekstern",
+            "ru": "Внешний",
+            "pl": "Zewnętrzny"
+        }
+      },
+      {
+        "id": "Middle Voltage",
+        "title": {
+            "en": "Middle Voltage",
+            "nl": "Middenspanning",
+            "de": "Mittlere Spannung",
+            "fr": "Tension Moyenne",
+            "it": "Tensione Media",
+            "sv": "Mellan Spänning",
+            "no": "Mellomspenning",
+            "es": "Voltaje Medio",
+            "da": "Mellem Spænding",
+            "ru": "Среднее Напряжение",
+            "pl": "Średnie Napięcie"
+        }
+      },
+      {
+        "id": "Internal",
+        "title": {
+            "en": "Internal",
+            "nl": "Intern",
+            "de": "Intern",
+            "fr": "Interne",
+            "it": "Interno",
+            "sv": "Intern",
+            "no": "Intern",
+            "es": "Interno",
+            "da": "Intern",
+            "ru": "Внутренний",
+            "pl": "Wewnętrzny"
+        }
+      },
+      {
+        "id": "Schedule",
+        "title": {
+            "en": "Schedule",
+            "nl": "Schema",
+            "de": "Zeitplan",
+            "fr": "Horaire",
+            "it": "Programma",
+            "sv": "Schema",
+            "no": "Timeplan",
+            "es": "Programa",
+            "da": "Tidsplan",
+            "ru": "Расписание",
+            "pl": "Harmonogram"
+        }
+      }
+    ],        
+    "uiComponent": "sensor",
+    "getable": true,
+    "setable": false,
+    "icon": "/assets/charging.svg"
+  }
