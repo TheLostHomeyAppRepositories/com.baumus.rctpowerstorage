@@ -160,7 +160,7 @@ class MyDevice extends Device {
   async setCapSolarPower(value) {
     if (this.getCapabilityValue('solar_power') !== value) {
       await this.setCapabilityValue('solar_power', value);
-      const tokens = { solar_power: value };
+      const tokens = { Watt: value };
       const state = {};
       this.homey.flow.getDeviceTriggerCard('solar_power_changed').trigger(this, tokens, state);
     }
