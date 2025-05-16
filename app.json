@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.baumus.rctpowerstorage",
-  "version": "1.3.2",
+  "version": "2.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "platforms": [
@@ -102,6 +102,163 @@
             },
             "type": "number",
             "example": 7.5
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=rct-power-storage-dc"
+          }
+        ]
+      },
+      {
+        "id": "measure_battery_changed",
+        "title": {
+          "en": "The battery level changed",
+          "nl": "Het accuniveau is veranderd",
+          "de": "Der Batterieladestand hat sich geändert",
+          "fr": "Le niveau de la batterie a changé",
+          "it": "Il livello della batteria è cambiato",
+          "sv": "Batterinivån ändrades",
+          "no": "Batterinivået ble endret",
+          "es": "El nivel de la batería ha cambiado",
+          "da": "Batteriniveauet har ændret sig",
+          "ru": "Уровень аккумулятора изменен",
+          "pl": "Zmienił się poziom baterii",
+          "ko": "배터리 수준 변경됨"
+        },
+        "tokens": [
+          {
+            "name": "measure_battery",
+            "title": {
+              "en": "Battery",
+              "nl": "Accuniveau",
+              "de": "Batterieladestand",
+              "fr": "Batterie",
+              "it": "Batteria",
+              "sv": "Batteri",
+              "no": "Batteri",
+              "es": "Batería",
+              "da": "Batteri",
+              "ru": "Аккумулятор",
+              "pl": "Bateria",
+              "ko": "배터리"
+            },
+            "type": "number",
+            "example": 99,
+            "label": "%"
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=rct-power-storage-dc"
+          }
+        ]
+      },
+      {
+        "id": "soc_strategy_changed",
+        "title": {
+          "en": "SOC Strategy Changed",
+          "nl": "SOC-strategie gewijzigd",
+          "de": "SOC-Strategie geändert",
+          "fr": "Stratégie SOC modifiée",
+          "it": "Strategia SOC modificata",
+          "sv": "SOC-strategi ändrad",
+          "no": "SOC-strategi endret",
+          "es": "Estrategia SOC cambiada",
+          "da": "SOC-strategi ændret",
+          "ru": "Стратегия SOC изменена",
+          "pl": "Strategia SOC zmieniona"
+        },
+        "titleFormatted": {
+          "en": "SOC Strategy Changed",
+          "nl": "SOC-strategie gewijzigd",
+          "de": "SOC-Strategie geändert",
+          "fr": "Stratégie SOC modifiée",
+          "it": "Strategia SOC modificata",
+          "sv": "SOC-strategi ändrad",
+          "no": "SOC-strategi endret",
+          "es": "Estrategia SOC cambiada",
+          "da": "SOC-strategi ændret",
+          "ru": "Стратегия SOC изменена",
+          "pl": "Strategia SOC zmieniona"
+        },
+        "tokens": [
+          {
+            "name": "soc_strategy",
+            "title": {
+              "en": "SOC Strategy",
+              "nl": "SOC Strategie",
+              "de": "SOC Strategie",
+              "fr": "Stratégie SOC",
+              "it": "Strategia SOC",
+              "sv": "SOC Strategi",
+              "no": "SOC Strategi",
+              "es": "Estrategia SOC",
+              "da": "SOC Strategi",
+              "ru": "Стратегия SOC",
+              "pl": "Strategia SOC"
+            },
+            "type": "string",
+            "meta": {}
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=rct-power-storage-dc"
+          }
+        ]
+      },
+      {
+        "id": "solar_power_changed",
+        "title": {
+          "en": "Solar Power Changed",
+          "nl": "Zonne-energie gewijzigd",
+          "de": "Solarenergie hat sich geändert",
+          "fr": "Puissance solaire modifiée",
+          "it": "Potenza solare modificata",
+          "sv": "Solenergi ändrad",
+          "no": "Solenergi endret",
+          "es": "Potencia solar modificada",
+          "da": "Solenergi ændret",
+          "ru": "Солнечная энергия изменена",
+          "pl": "Moc solarna zmieniona"
+        },
+        "titleFormatted": {
+          "en": "Solar Power Changed",
+          "nl": "Zonne-energie gewijzigd",
+          "de": "Solarenergie hat sich geändert",
+          "fr": "Puissance solaire modifiée",
+          "it": "Potenza solare modificata",
+          "sv": "Solenergi ändrad",
+          "no": "Solenergi endret",
+          "es": "Potencia solar modificada",
+          "da": "Solenergi ændret",
+          "ru": "Солнечная энергия изменена",
+          "pl": "Moc solarna zmieniona"
+        },
+        "tokens": [
+          {
+            "type": "number",
+            "name": "Watt",
+            "title": {
+              "en": "Solar Power (W)",
+              "nl": "Zonne-energie (W)",
+              "de": "Solarenergie (W)",
+              "fr": "Puissance solaire (W)",
+              "it": "Potenza solare (W)",
+              "sv": "Solenergi (W)",
+              "no": "Solenergi (W)",
+              "es": "Potencia solar (W)",
+              "da": "Solenergi (W)",
+              "ru": "Солнечная энергия (Вт)",
+              "pl": "Moc solarna (W)"
+            }
           }
         ],
         "args": [
@@ -229,6 +386,385 @@
             "step": 1
           }
         ]
+      },
+      {
+        "id": "inverter-power-greater-than",
+        "title": {
+          "en": "Inverter Power !{{greater|less}} than",
+          "nl": "Omvormer vermogen !{{groter|kleiner}} dan",
+          "de": "Inverterleistung !{{größer|kleiner}} als",
+          "fr": "Puissance de l'onduleur !{{supérieure|inférieure}} à",
+          "it": "Potenza dell'inverter !{{maggiore|minore}} di",
+          "sv": "Invertereffekt !{{större|mindre}} än",
+          "no": "Invertereffekt !{{større|mindre}} enn",
+          "es": "Potencia del inversor !{{mayor|menor}} que",
+          "da": "Invertereffekt !{{større|mindre}} end",
+          "ru": "Мощность инвертора !{{больше|меньше}}, чем",
+          "pl": "Moc przekształtnika !{{większa|mniejsza}} niż"
+        },
+        "titleFormatted": {
+          "en": "Inverter Power !{{greater|less}} than [[Watt]]W",
+          "nl": "Omvormer vermogen !{{groter|kleiner}} dan [[Watt]]W",
+          "de": "Inverterleistung !{{größer|kleiner}} als [[Watt]]W",
+          "fr": "Puissance de l'onduleur !{{supérieure|inférieure}} à [[Watt]]W",
+          "it": "Potenza dell'inverter !{{maggiore|minore}} di [[Watt]]W",
+          "sv": "Invertereffekt !{{större|mindre}} än [[Watt]]W",
+          "no": "Invertereffekt !{{større|mindre}} enn [[Watt]]W",
+          "es": "Potencia del inversor !{{mayor|menor}} que [[Watt]]W",
+          "da": "Invertereffekt !{{større|mindre}} end [[Watt]]W",
+          "ru": "Мощность инвертора !{{больше|меньше}}, чем [[Watt]]Вт",
+          "pl": "Moc przekształtnika !{{większa|mniejsza}} niż [[Watt]]W"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=rct-power-storage-dc"
+          },
+          {
+            "type": "number",
+            "name": "Watt",
+            "title": {
+              "en": "Inverter Power (W)",
+              "nl": "Omvormer vermogen (W)",
+              "de": "Inverterleistung (W)",
+              "fr": "Puissance de l'onduleur (W)",
+              "it": "Potenza dell'inverter (W)",
+              "sv": "Invertereffekt (W)",
+              "no": "Invertereffekt (W)",
+              "es": "Potencia del inversor (W)",
+              "da": "Invertereffekt (W)",
+              "ru": "Мощность инвертора (Вт)",
+              "pl": "Moc przekształtnika (W)"
+            },
+            "placeholder": {
+              "en": "100"
+            },
+            "min": 0,
+            "max": 10000,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "load-household-greater-than",
+        "title": {
+          "en": "Household Load !{{greater|less}} than",
+          "nl": "Huishoudelijke belasting !{{groter|kleiner}} dan",
+          "de": "Stromverbrauch !{{größer|kleiner}} als",
+          "fr": "Charge domestique !{{supérieure|inférieure}} à",
+          "it": "Carico domestico !{{maggiore|minore}} di",
+          "sv": "Hushållslast !{{större|mindre}} än",
+          "no": "Husholdningsbelastning !{{større|mindre}} enn",
+          "es": "Carga doméstica !{{mayor|menor}} que",
+          "da": "Husholdningsbelastning !{{større|mindre}} end",
+          "ru": "Домашняя нагрузка !{{больше|меньше}}, чем",
+          "pl": "Obciążenie domowe !{{większe|mniejsze}} niż"
+        },
+        "titleFormatted": {
+          "en": "Household Load !{{greater|less}} than [[Watt]]W",
+          "nl": "Huishoudelijke belasting !{{groter|kleiner}} dan [[Watt]]W",
+          "de": "Stromverbrauch !{{größer|kleiner}} als [[Watt]]W",
+          "fr": "Charge domestique !{{supérieure|inférieure}} à [[Watt]]W",
+          "it": "Carico domestico !{{maggiore|minore}} di [[Watt]]W",
+          "sv": "Hushållslast !{{större|mindre}} än [[Watt]]W",
+          "no": "Husholdningsbelastning !{{større|mindre}} enn [[Watt]]W",
+          "es": "Carga doméstica !{{mayor|menor}} que [[Watt]]W",
+          "da": "Husholdningsbelastning !{{større|mindre}} end [[Watt]]W",
+          "ru": "Домашняя нагрузка !{{больше|меньше}}, чем [[Watt]]Вт",
+          "pl": "Obciążenie domowe !{{większe|mniejsze}} niż [[Watt]]W"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=rct-power-storage-dc"
+          },
+          {
+            "type": "number",
+            "name": "Watt",
+            "title": {
+              "en": "Household Load (W)",
+              "nl": "Huishoudelijke belasting (W)",
+              "de": "Stromverbrauch (W)",
+              "fr": "Charge domestique (W)",
+              "it": "Carico domestico (W)",
+              "sv": "Hushållslast (W)",
+              "no": "Husholdningsbelastning (W)",
+              "es": "Carga doméstica (W)",
+              "da": "Husholdningsbelastning (W)",
+              "ru": "Домашняя нагрузка (Вт)",
+              "pl": "Obciążenie domowe (W)"
+            },
+            "placeholder": {
+              "en": "100"
+            },
+            "min": 0,
+            "max": 60000,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "total-grid-power-greater-than",
+        "title": {
+          "en": "Total Grid Power !{{greater|less}} than",
+          "nl": "Totaal netvermogen !{{groter|kleiner}} dan",
+          "de": "Netzleistung !{{größer|kleiner}} als",
+          "fr": "Puissance totale du réseau !{{supérieure|inférieure}} à",
+          "it": "Potenza totale della rete !{{maggiore|minore}} di",
+          "sv": "Totalt nätverkseffekt !{{större|mindre}} än",
+          "no": "Totalt nettverkseffekt !{{større|mindre}} enn",
+          "es": "Potencia total de la red !{{mayor|menor}} que",
+          "da": "Samlet netværkseffekt !{{større|mindre}} end",
+          "ru": "Общая мощность сети !{{больше|меньше}}, чем",
+          "pl": "Całkowita moc sieci !{{większa|mniejsza}} niż"
+        },
+        "titleFormatted": {
+          "en": "Total Grid Power !{{greater|less}} than [[Watt]]W",
+          "nl": "Totaal netvermogen !{{groter|kleiner}} dan [[Watt]]W",
+          "de": "Netzleistung !{{größer|kleiner}} als [[Watt]]W",
+          "fr": "Puissance totale du réseau !{{supérieure|inférieure}} à [[Watt]]W",
+          "it": "Potenza totale della rete !{{maggiore|minore}} di [[Watt]]W",
+          "sv": "Totalt nätverkseffekt !{{större|mindre}} än [[Watt]]W",
+          "no": "Totalt nettverkseffekt !{{større|mindre}} enn [[Watt]]W",
+          "es": "Potencia total de la red !{{mayor|menor}} que [[Watt]]W",
+          "da": "Samlet netværkseffekt !{{større|mindre}} end [[Watt]]W",
+          "ru": "Общая мощность сети !{{больше|меньше}}, чем [[Watt]]Вт",
+          "pl": "Całkowita moc sieci !{{większa|mniejsza}} niż [[Watt]]W"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=rct-power-storage-dc"
+          },
+          {
+            "type": "number",
+            "name": "Watt",
+            "title": {
+              "en": "Total Grid Power (W)",
+              "nl": "Totaal netvermogen (W)",
+              "de": "Netzleistung (W)",
+              "fr": "Puissance totale du réseau (W)",
+              "it": "Potenza totale della rete (W)",
+              "sv": "Totalt nätverkseffekt (W)",
+              "no": "Totalt nettverkseffekt (W)",
+              "es": "Potencia total de la red (W)",
+              "da": "Samlet netværkseffekt (W)",
+              "ru": "Общая мощность сети (Вт)",
+              "pl": "Całkowita moc sieci (W)"
+            },
+            "placeholder": {
+              "en": "100"
+            },
+            "min": 0,
+            "max": 60000,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "soc_strategy_is",
+        "title": {
+          "en": "SOC Strategy !{{is|is not}}",
+          "nl": "SOC-strategie !{{is|is niet}}",
+          "de": "SOC-Strategie !{{ist|ist nicht}}",
+          "fr": "Stratégie SOC !{{est|n'est pas}}",
+          "it": "Strategia SOC !{{è|non è}}",
+          "sv": "SOC-strategi !{{är|är inte}}",
+          "no": "SOC-strategi !{{er|er ikke}}",
+          "es": "Estrategia SOC !{{es|no es}}",
+          "da": "SOC-strategi !{{er|er ikke}}",
+          "ru": "Стратегия SOC !{{является|не является}}",
+          "pl": "Strategia SOC !{{jest|nie jest}}"
+        },
+        "titleFormatted": {
+          "en": "SOC Strategy !{{is|is not}} [[soc_strategy]]",
+          "nl": "SOC-strategie !{{is|is niet}} [[soc_strategy]]",
+          "de": "SOC-Strategie !{{ist|ist nicht}} [[soc_strategy]]",
+          "fr": "Stratégie SOC !{{est|n'est pas}} [[soc_strategy]]",
+          "it": "Strategia SOC !{{è|non è}} [[soc_strategy]]",
+          "sv": "SOC-strategi !{{är|är inte}} [[soc_strategy]]",
+          "no": "SOC-strategi !{{er|er ikke}} [[soc_strategy]]",
+          "es": "Estrategia SOC !{{es|no es}} [[soc_strategy]]",
+          "da": "SOC-strategi !{{er|er ikke}} [[soc_strategy]]",
+          "ru": "Стратегия SOC !{{является|не является}} [[soc_strategy]]",
+          "pl": "Strategia SOC !{{jest|nie jest}} [[soc_strategy]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=rct-power-storage-dc"
+          },
+          {
+            "type": "dropdown",
+            "name": "soc_strategy",
+            "title": {
+              "en": "SOC Strategy",
+              "nl": "SOC Strategie",
+              "de": "SOC Strategie",
+              "fr": "Stratégie SOC",
+              "it": "Strategia SOC",
+              "sv": "SOC Strategi",
+              "no": "SOC Strategi",
+              "es": "Estrategia SOC",
+              "da": "SOC Strategi",
+              "ru": "Стратегия SOC",
+              "pl": "Strategia SOC"
+            },
+            "values": [
+              {
+                "id": "SOC",
+                "title": {
+                  "en": "Maintain SOC",
+                  "nl": "SOC behouden",
+                  "de": "SOC halten",
+                  "fr": "Maintenir SOC",
+                  "it": "Mantieni SOC",
+                  "sv": "Behåll SOC",
+                  "no": "Behold SOC",
+                  "es": "Mantener SOC",
+                  "da": "Behold SOC",
+                  "ru": "Поддерживать SOC",
+                  "pl": "Utrzymuj SOC"
+                }
+              },
+              {
+                "id": "Constant",
+                "title": {
+                  "en": "Constant",
+                  "nl": "Constante",
+                  "de": "Konstante",
+                  "fr": "Constante",
+                  "it": "Costante",
+                  "sv": "Konstant",
+                  "no": "Konstant",
+                  "es": "Constante",
+                  "da": "Konstant",
+                  "ru": "Константа",
+                  "pl": "Stała"
+                }
+              },
+              {
+                "id": "External",
+                "title": {
+                  "en": "External",
+                  "nl": "Extern",
+                  "de": "Extern",
+                  "fr": "Externe",
+                  "it": "Esterno",
+                  "sv": "Extern",
+                  "no": "Ekstern",
+                  "es": "Externo",
+                  "da": "Ekstern",
+                  "ru": "Внешний",
+                  "pl": "Zewnętrzny"
+                }
+              },
+              {
+                "id": "Middle Voltage",
+                "title": {
+                  "en": "Middle Voltage",
+                  "nl": "Middenspanning",
+                  "de": "Mittlere Spannung",
+                  "fr": "Tension Moyenne",
+                  "it": "Tensione Media",
+                  "sv": "Mellan Spänning",
+                  "no": "Mellomspenning",
+                  "es": "Voltaje Medio",
+                  "da": "Mellem Spænding",
+                  "ru": "Среднее Напряжение",
+                  "pl": "Średnie Napięcie"
+                }
+              },
+              {
+                "id": "Internal",
+                "title": {
+                  "en": "Internal",
+                  "nl": "Intern",
+                  "de": "Intern",
+                  "fr": "Interne",
+                  "it": "Interno",
+                  "sv": "Intern",
+                  "no": "Intern",
+                  "es": "Interno",
+                  "da": "Intern",
+                  "ru": "Внутренний",
+                  "pl": "Wewnętrzny"
+                }
+              },
+              {
+                "id": "Schedule",
+                "title": {
+                  "en": "Schedule",
+                  "nl": "Schema",
+                  "de": "Zeitplan",
+                  "fr": "Horaire",
+                  "it": "Programma",
+                  "sv": "Schema",
+                  "no": "Timeplan",
+                  "es": "Programa",
+                  "da": "Tidsplan",
+                  "ru": "Расписание",
+                  "pl": "Harmonogram"
+                }
+              }
+            ],
+            "meta": {}
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "enable_grid_charging",
+        "title": {
+          "en": "Enable Grid Charging"
+        },
+        "hint": {
+          "en": "This mode overrides the internal charging strategy and allows the inverter to charge the battery from the grid."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=rct-power-storage-dc"
+          }
+        ]
+      },
+      {
+        "id": "enable_default_operating_mode",
+        "title": {
+          "en": "Enable Default Operating Mode"
+        },
+        "hint": {
+          "en": "This sets the inverter to the default operating mode."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=rct-power-storage-dc"
+          }
+        ]
+      },
+      {
+        "id": "disable_battery_discharge",
+        "title": {
+          "en": "Disable Battery Discharge"
+        },
+        "hint": {
+          "en": "This mode overrides the internal charging strategy and prevents the inverter from discharging the battery."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=rct-power-storage-dc"
+          }
+        ]
       }
     ]
   },
@@ -245,7 +781,8 @@
         "total_grid_power",
         "load_household",
         "measure_battery",
-        "battery_modus"
+        "battery_modus",
+        "soc_strategy"
       ],
       "capabilitiesOptions": {
         "measure_power": {
@@ -343,6 +880,173 @@
               "value": 20,
               "label": {
                 "en": "Polling interval in seconds"
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Grid Charging Management"
+          },
+          "children": [
+            {
+              "id": "enable_inverter_management",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Enable Grid Charging Management"
+              },
+              "hint": {
+                "en": "USE AT YOUR OWN RISK !!! - Activate features to manage inverter operation by sending commands and writing values to the inverter's memory. You as user are fully responsible for any harm or damage caused. Please feel free to review the source code on GitHub first before activating this feature."
+              }
+            },
+            {
+              "id": "max_grid_charge_power",
+              "type": "number",
+              "value": 6000,
+              "min": 0,
+              "max": 6000,
+              "units": "watts",
+              "label": {
+                "en": "Max Grid Charge Power (W)"
+              },
+              "hint": {
+                "en": "The maximum power in Watt the inverter is allowed to charge the battery from the grid."
+              }
+            },
+            {
+              "id": "default_max_grid_charge_power",
+              "type": "number",
+              "value": 0,
+              "min": 0,
+              "max": 6000,
+              "units": "watts",
+              "label": {
+                "en": "Default Max Grid Charge Power (W)"
+              },
+              "hint": {
+                "en": "Set the default maximum grid charging power in watts. This value will be used when the inverter is reset to standard operations after grid charging. The standard value is 0 watts and should only be changed if you know what you are doing."
+              }
+            },
+            {
+              "id": "default_soc_strategy",
+              "type": "dropdown",
+              "value": "Internal",
+              "label": {
+                "en": "Default SOC Strategy"
+              },
+              "values": [
+                {
+                  "id": "SOC",
+                  "label": {
+                    "en": "Maintain SOC",
+                    "nl": "SOC behouden",
+                    "de": "SOC halten",
+                    "fr": "Maintenir SOC",
+                    "it": "Mantieni SOC",
+                    "sv": "Behåll SOC",
+                    "no": "Behold SOC",
+                    "es": "Mantener SOC",
+                    "da": "Behold SOC",
+                    "ru": "Поддерживать SOC",
+                    "pl": "Utrzymuj SOC"
+                  }
+                },
+                {
+                  "id": "Constant",
+                  "label": {
+                    "en": "Constant",
+                    "nl": "Constante",
+                    "de": "Konstante",
+                    "fr": "Constante",
+                    "it": "Costante",
+                    "sv": "Konstant",
+                    "no": "Konstant",
+                    "es": "Constante",
+                    "da": "Konstant",
+                    "ru": "Константа",
+                    "pl": "Stała"
+                  }
+                },
+                {
+                  "id": "External",
+                  "label": {
+                    "en": "External",
+                    "nl": "Extern",
+                    "de": "Extern",
+                    "fr": "Externe",
+                    "it": "Esterno",
+                    "sv": "Extern",
+                    "no": "Ekstern",
+                    "es": "Externo",
+                    "da": "Ekstern",
+                    "ru": "Внешний",
+                    "pl": "Zewnętrzny"
+                  }
+                },
+                {
+                  "id": "Middle Voltage",
+                  "label": {
+                    "en": "Middle Voltage",
+                    "nl": "Middenspanning",
+                    "de": "Mittlere Spannung",
+                    "fr": "Tension Moyenne",
+                    "it": "Tensione Media",
+                    "sv": "Mellan Spänning",
+                    "no": "Mellomspenning",
+                    "es": "Voltaje Medio",
+                    "da": "Mellem Spænding",
+                    "ru": "Среднее Напряжение",
+                    "pl": "Średnie Napięcie"
+                  }
+                },
+                {
+                  "id": "Internal",
+                  "label": {
+                    "en": "Internal",
+                    "nl": "Intern",
+                    "de": "Intern",
+                    "fr": "Interne",
+                    "it": "Interno",
+                    "sv": "Intern",
+                    "no": "Intern",
+                    "es": "Interno",
+                    "da": "Intern",
+                    "ru": "Внутренний",
+                    "pl": "Wewnętrzny"
+                  }
+                },
+                {
+                  "id": "Schedule",
+                  "label": {
+                    "en": "Schedule",
+                    "nl": "Schema",
+                    "de": "Zeitplan",
+                    "fr": "Horaire",
+                    "it": "Programma",
+                    "sv": "Schema",
+                    "no": "Timeplan",
+                    "es": "Programa",
+                    "da": "Tidsplan",
+                    "ru": "Расписание",
+                    "pl": "Harmonogram"
+                  }
+                }
+              ],
+              "hint": {
+                "en": "Set the default SOC strategy for the inverter. The SOC strategy will be used when the inverter is reset to standard operations after grid charging. The standard value is 'Internal' and should only be changed if you know what you are doing."
+              }
+            },
+            {
+              "id": "default_use_grid_power_enabled",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Default Use Grid Power Enabled"
+              },
+              "hint": {
+                "en": "Set the default value for the 'Use Grid Power' feature. This value will be used when the inverter is reset to standard operations after grid charging. The standard value is 'false' and should only be changed if you know what you are doing."
               }
             }
           ]
@@ -614,6 +1318,124 @@
       "chartType": "stepLine",
       "decimals": 0,
       "icon": "/assets/energy.svg"
+    },
+    "soc_strategy": {
+      "type": "enum",
+      "title": {
+        "en": "SOC Strategy",
+        "nl": "SOC Strategie",
+        "de": "SOC Strategie",
+        "fr": "Stratégie SOC",
+        "it": "Strategia SOC",
+        "sv": "SOC Strategi",
+        "no": "SOC Strategi",
+        "es": "Estrategia SOC",
+        "da": "SOC Strategi",
+        "ru": "Стратегия SOC",
+        "pl": "Strategia SOC"
+      },
+      "values": [
+        {
+          "id": "SOC",
+          "title": {
+            "en": "Maintain SOC",
+            "nl": "SOC behouden",
+            "de": "SOC halten",
+            "fr": "Maintenir SOC",
+            "it": "Mantieni SOC",
+            "sv": "Behåll SOC",
+            "no": "Behold SOC",
+            "es": "Mantener SOC",
+            "da": "Behold SOC",
+            "ru": "Поддерживать SOC",
+            "pl": "Utrzymuj SOC"
+          }
+        },
+        {
+          "id": "Constant",
+          "title": {
+            "en": "Constant",
+            "nl": "Constante",
+            "de": "Konstante",
+            "fr": "Constante",
+            "it": "Costante",
+            "sv": "Konstant",
+            "no": "Konstant",
+            "es": "Constante",
+            "da": "Konstant",
+            "ru": "Константа",
+            "pl": "Stała"
+          }
+        },
+        {
+          "id": "External",
+          "title": {
+            "en": "External",
+            "nl": "Extern",
+            "de": "Extern",
+            "fr": "Externe",
+            "it": "Esterno",
+            "sv": "Extern",
+            "no": "Ekstern",
+            "es": "Externo",
+            "da": "Ekstern",
+            "ru": "Внешний",
+            "pl": "Zewnętrzny"
+          }
+        },
+        {
+          "id": "Middle Voltage",
+          "title": {
+            "en": "Middle Voltage",
+            "nl": "Middenspanning",
+            "de": "Mittlere Spannung",
+            "fr": "Tension Moyenne",
+            "it": "Tensione Media",
+            "sv": "Mellan Spänning",
+            "no": "Mellomspenning",
+            "es": "Voltaje Medio",
+            "da": "Mellem Spænding",
+            "ru": "Среднее Напряжение",
+            "pl": "Średnie Napięcie"
+          }
+        },
+        {
+          "id": "Internal",
+          "title": {
+            "en": "Internal",
+            "nl": "Intern",
+            "de": "Intern",
+            "fr": "Interne",
+            "it": "Interno",
+            "sv": "Intern",
+            "no": "Intern",
+            "es": "Interno",
+            "da": "Intern",
+            "ru": "Внутренний",
+            "pl": "Wewnętrzny"
+          }
+        },
+        {
+          "id": "Schedule",
+          "title": {
+            "en": "Schedule",
+            "nl": "Schema",
+            "de": "Zeitplan",
+            "fr": "Horaire",
+            "it": "Programma",
+            "sv": "Schema",
+            "no": "Timeplan",
+            "es": "Programa",
+            "da": "Tidsplan",
+            "ru": "Расписание",
+            "pl": "Harmonogram"
+          }
+        }
+      ],
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/charging.svg"
     },
     "solar_power": {
       "type": "number",
