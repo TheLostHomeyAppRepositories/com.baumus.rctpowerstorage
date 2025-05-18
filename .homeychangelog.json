@@ -40,5 +40,8 @@
   },
   "2.0.1": {
     "en": "Fixed: Flow Card - Solar Power Changed"
+  },
+  "2.0.2": {
+    "en": "Fixed: ActionCard Enable Default Operating Mode"
   }
 }
