@@ -233,7 +233,7 @@ class MyDevice extends Device {
   }
 
   // Set Inverter to enable solar charging mode
-  async enableDefaultOpertingMode() {
+  async enableDefaultOperatingMode() {
     const isEnabled = await this.getSetting('enable_inverter_management');
     if (!isEnabled) {
       throw new Error('Inverter Management is disabled. Enable it in the device settings to use this action.');
