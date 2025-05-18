@@ -22,7 +22,7 @@ class MyDevice extends Device {
     // Error handling for connection errors
     try {
       // Establish a connection
-      const conn = new Connection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
+      const conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
       await conn.connect();
 
       // Query the Battery Capacity and Module Health (only during initialization)
@@ -100,7 +100,7 @@ class MyDevice extends Device {
 
     try {
       // Establish a connection
-      conn = new Connection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
+      conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
       await conn.connect();
 
       // Query and update regularly changing data
@@ -209,7 +209,7 @@ class MyDevice extends Device {
 
     try {
       // Establish a connection
-      conn = new Connection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
+      conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
       await conn.connect();
 
       // Set the inverter to disable battery discharge mode
@@ -245,7 +245,7 @@ class MyDevice extends Device {
 
     try {
       // Establish a connection
-      conn = new Connection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
+      conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
       await conn.connect();
 
       // Set the inverter to enable solar charging mode
@@ -279,7 +279,7 @@ class MyDevice extends Device {
 
     try {
       // Establish a connection
-      conn = new Connection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
+      conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
       await conn.connect();
 
       // Set the inverter to enable grid charging mode

@@ -80,7 +80,7 @@ class MyDriver extends Driver {
     session.setHandler('validate', async (data) => {
       this.log('Validate new connection settings');
 
-      const connection = new Connection(data.host, data.port, 5000);
+      const connection = Connection.getPooledConnection(data.host, data.port, 5000);
       try {
         await connection.connect();
         this.log('Connection successful');
