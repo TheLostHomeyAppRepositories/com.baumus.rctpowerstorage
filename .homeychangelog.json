@@ -46,5 +46,8 @@
   },
   "2.1.0": {
     "en": "Added: Connection Pooling"
+  },
+  "2.1.1": {
+    "en": "Fix: Update SOC Strategy in device and homey"
   }
 }
