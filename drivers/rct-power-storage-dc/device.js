@@ -214,6 +214,7 @@ class MyDevice extends Device {
 
       // Set the inverter to disable battery discharge mode
       await conn.write(Identifier.POWER_MNG_SOC_STRATEGY, SOCStrategy.EXTERNAL);
+      await this.setCapSOCStrategy(SOCStrategy.EXTERNAL);
       await conn.write(Identifier.POWER_MNG_BATTERY_POWER_EXTERN_W, 0);
       await conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, true);
     } catch (error) {
@@ -250,6 +251,7 @@ class MyDevice extends Device {
 
       // Set the inverter to enable solar charging mode
       await conn.write(Identifier.POWER_MNG_SOC_STRATEGY, Object.entries(SOCStrategy).find(([_, value]) => SOCStrategy.toString(value) === defaultSocStrategy)?.[1] ?? null);
+      await this.setCapSOCStrategy(Object.entries(SOCStrategy).find(([_, value]) => SOCStrategy.toString(value) === defaultSocStrategy)?.[1] ?? null);
       await conn.write(Identifier.POWER_MNG_BATTERY_POWER_EXTERN_W, defaultMaxGridChargePower);
       await conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, defaultUseGridPowerEnabled);
     } catch (error) {
@@ -284,6 +286,7 @@ class MyDevice extends Device {
 
       // Set the inverter to enable grid charging mode
       await conn.write(Identifier.POWER_MNG_SOC_STRATEGY, SOCStrategy.EXTERNAL);
+      await this.setCapSOCStrategy(SOCStrategy.EXTERNAL);
       await conn.write(Identifier.POWER_MNG_BATTERY_POWER_EXTERN_W, -1 * maxGridPower);
       await conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, true);
     } catch (error) {
