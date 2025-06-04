@@ -49,5 +49,8 @@
   },
   "2.1.1": {
     "en": "Fix: Update SOC Strategy in device and homey"
+  },
+  "2.1.2": {
+    "en": "Fix: Updated connection handling"
   }
 }
