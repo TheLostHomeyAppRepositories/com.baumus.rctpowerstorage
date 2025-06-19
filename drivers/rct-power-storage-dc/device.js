@@ -87,6 +87,7 @@ class MyDevice extends Device {
    */
   async onDeleted() {
     this.log('MyDevice has been deleted');
+    this.deleted = true;
     if (this.pollingInterval) {
       clearInterval(this.pollingInterval);
     }
@@ -96,6 +97,7 @@ class MyDevice extends Device {
    * updateDeviceData handles regular updates to device capabilities.
    */
   async updateDeviceData() {
+    if (this.deleted) return;
     let conn;
 
     try {
@@ -214,7 +216,7 @@ class MyDevice extends Device {
 
       // Set the inverter to disable battery discharge mode
       await conn.write(Identifier.POWER_MNG_SOC_STRATEGY, SOCStrategy.EXTERNAL);
-      await this.setCapSOCStrategy(SOCStrategy.EXTERNAL);
+      await this.setCapSOCStrategy(SOCStrategy.toString(SOCStrategy.EXTERNAL));
       await conn.write(Identifier.POWER_MNG_BATTERY_POWER_EXTERN_W, 0);
       await conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, true);
     } catch (error) {
@@ -224,7 +226,7 @@ class MyDevice extends Device {
       if (error.code === 'EHOSTUNREACH') {
         await this.setUnavailable(`The target device ${this.getStoreValue('address')}:${this.getStoreValue('port')} is unreachable.`);
       } else {
-        await this.setUnavailable('Device is currently unavailable due to an error.');
+        await this.setUnavailable('Device is currently unavailable due to an error:', error.message);
       }
     } finally {
       if (conn) {
@@ -251,7 +253,7 @@ class MyDevice extends Device {
 
       // Set the inverter to enable solar charging mode
       await conn.write(Identifier.POWER_MNG_SOC_STRATEGY, Object.entries(SOCStrategy).find(([_, value]) => SOCStrategy.toString(value) === defaultSocStrategy)?.[1] ?? null);
-      await this.setCapSOCStrategy(Object.entries(SOCStrategy).find(([_, value]) => SOCStrategy.toString(value) === defaultSocStrategy)?.[1] ?? null);
+      await this.setCapSOCStrategy(defaultSocStrategy);
       await conn.write(Identifier.POWER_MNG_BATTERY_POWER_EXTERN_W, defaultMaxGridChargePower);
       await conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, defaultUseGridPowerEnabled);
     } catch (error) {
@@ -286,7 +288,7 @@ class MyDevice extends Device {
 
       // Set the inverter to enable grid charging mode
       await conn.write(Identifier.POWER_MNG_SOC_STRATEGY, SOCStrategy.EXTERNAL);
-      await this.setCapSOCStrategy(SOCStrategy.EXTERNAL);
+      await this.setCapSOCStrategy(SOCStrategy.toString(SOCStrategy.EXTERNAL));
       await conn.write(Identifier.POWER_MNG_BATTERY_POWER_EXTERN_W, -1 * maxGridPower);
       await conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, true);
     } catch (error) {
