@@ -52,5 +52,8 @@
   },
   "2.1.2": {
     "en": "Fix: Updated connection handling"
+  },
+  "2.1.3": {
+    "en": "Fix: Update SOC-Strategy"
   }
 }
