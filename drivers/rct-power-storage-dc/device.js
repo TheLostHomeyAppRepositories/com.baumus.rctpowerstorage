@@ -298,12 +298,21 @@ class MyDevice extends Device {
   }
 
   async ensureConnection() {
+    const now = Date.now();
+    // Nach letztem Verbindungsversuch mindestens 10s warten
+    if (this._lastConnectAttempt && now - this._lastConnectAttempt < 10000) {
+      this.log('Delaying reconnect after recent failure');
+      throw new Error('Delaying reconnect after recent failure');
+    }
+    this._lastConnectAttempt = now;
+
     if (!this.conn) {
       this.conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
       try {
         await this.conn.connect();
       } catch (error) {
         this.log('Error connecting to device:', error);
+        this.conn = null;
         throw new Error(`Could not connect to device at ${this.getStoreValue('address')}:${this.getStoreValue('port')}`);
       }
     }
