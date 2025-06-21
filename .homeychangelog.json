@@ -61,5 +61,8 @@
   },
   "2.1.5": {
     "en": "Fix: Reconnect device"
+  },
+  "2.1.6": {
+    "en": "Fix: Reconnect device"
   }
 }
