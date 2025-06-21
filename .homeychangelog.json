@@ -55,5 +55,8 @@
   },
   "2.1.3": {
     "en": "Fix: Update SOC-Strategy"
+  },
+  "2.1.4": {
+    "en": "Optimized: Device connection pooling"
   }
 }
