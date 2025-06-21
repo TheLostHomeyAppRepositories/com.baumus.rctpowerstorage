@@ -58,5 +58,8 @@
   },
   "2.1.4": {
     "en": "Optimized: Device connection pooling"
+  },
+  "2.1.5": {
+    "en": "Fix: Reconnect device"
   }
 }
