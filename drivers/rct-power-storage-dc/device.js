@@ -96,7 +96,12 @@ class MyDevice extends Device {
    */
   async updateDeviceData() {
     if (this.deleted) return;
-    await this.ensureConnection();
+    const ok = await this.ensureConnection();
+    if (!ok) {
+      // If connection failed, we don't want to throw an error here, just return
+      this.log('Connection failed, skipping update');
+      return;
+    }
 
     try {
       // Query and update regularly changing data
@@ -203,9 +208,8 @@ class MyDevice extends Device {
       throw new Error('Inverter Management is disabled. Enable it in the device settings to use this action.');
     }
 
-    await this.ensureConnection();
-
     try {
+      await this.ensureConnection({ throwOnError: true });
       // Set the inverter to disable battery discharge mode
       await this.conn.write(Identifier.POWER_MNG_SOC_STRATEGY, SOCStrategy.EXTERNAL);
       await this.setCapSOCStrategy(SOCStrategy.toString(SOCStrategy.EXTERNAL));
@@ -235,12 +239,12 @@ class MyDevice extends Device {
     if (!isEnabled) {
       throw new Error('Inverter Management is disabled. Enable it in the device settings to use this action.');
     }
-    await this.ensureConnection();
     const defaultMaxGridChargePower = await this.getSetting('default_max_grid_charge_power');
     const defaultSocStrategy = await this.getSetting('default_soc_strategy');
     const defaultUseGridPowerEnabled = await this.getSetting('default_use_grid_power_enabled');
 
     try {
+      await this.ensureConnection({ throwOnError: true });
       // Set the inverter to enable solar charging mode
       await this.conn.write(Identifier.POWER_MNG_SOC_STRATEGY, Object.entries(SOCStrategy).find(([_, value]) => SOCStrategy.toString(value) === defaultSocStrategy)?.[1] ?? null);
       await this.setCapSOCStrategy(defaultSocStrategy);
@@ -270,10 +274,10 @@ class MyDevice extends Device {
     if (!isEnabled) {
       throw new Error('Inverter Management is disabled. Enable it in the device settings to use this action.');
     }
-    await this.ensureConnection();
     const maxGridPower = await this.getSetting('max_grid_charge_power');
 
     try {
+      await this.ensureConnection({ throwOnError: true });
       // Set the inverter to enable grid charging mode
       await this.conn.write(Identifier.POWER_MNG_SOC_STRATEGY, SOCStrategy.EXTERNAL);
       await this.setCapSOCStrategy(SOCStrategy.toString(SOCStrategy.EXTERNAL));
@@ -297,25 +301,31 @@ class MyDevice extends Device {
     }
   }
 
-  async ensureConnection() {
-    const now = Date.now();
-    // Nach letztem Verbindungsversuch mindestens 10s warten
-    if (this._lastConnectAttempt && now - this._lastConnectAttempt < 10000) {
-      this.log('Delaying reconnect after recent failure');
-      throw new Error('Delaying reconnect after recent failure');
-    }
-    this._lastConnectAttempt = now;
-
+  async ensureConnection({ throwOnError = false } = {}) {
     if (!this.conn) {
+      const now = Date.now();
+      if (this._lastConnectAttempt && now - this._lastConnectAttempt < 10000) {
+        this.log('Delaying reconnect after recent failure');
+        if (throwOnError) {
+          throw new Error('Delaying reconnect after recent failure');
+        }
+        return false; // silent fail für Polling
+      }
       this.conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
       try {
         await this.conn.connect();
       } catch (error) {
+        this._lastConnectAttempt = now;
         this.log('Error connecting to device:', error);
         this.conn = null;
-        throw new Error(`Could not connect to device at ${this.getStoreValue('address')}:${this.getStoreValue('port')}`);
+        this.setUnavailable(`Could not connect to device at ${this.getStoreValue('address')}:${this.getStoreValue('port')}`);
+        if (throwOnError) {
+          throw new Error(`Could not connect to device at ${this.getStoreValue('address')}:${this.getStoreValue('port')}`);
+        }
+        return false;
       }
     }
+    return true;
   }
 
 }
