@@ -11,23 +11,20 @@ class MyDevice extends Device {
    */
   async onInit() {
     this.log('MyDevice has been initialized');
-
+    this.conn = null;
     // check if migration is needed
     if (this.hasCapability('soc_stratgey') === false) {
       await this.addCapability('soc_strategy');
     }
 
     this.setAvailable();
+    await this.ensureConnection();
 
     // Error handling for connection errors
     try {
-      // Establish a connection
-      const conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
-      await conn.connect();
-
       // Query the Battery Capacity and Module Health (only during initialization)
-      const bcapacity = await conn.queryFloat32(Identifier.BATTERY_CAPACITY_AH);
-      const bvoltage = await conn.queryFloat32(Identifier.BATTERY_VOLTAGE);
+      const bcapacity = await this.conn.queryFloat32(Identifier.BATTERY_CAPACITY_AH);
+      const bvoltage = await this.conn.queryFloat32(Identifier.BATTERY_VOLTAGE);
       const roundedCapacity = (Math.round(((bcapacity * bvoltage) / 1000) * 10) / 10).toFixed(1);
 
       const batteryModules = [
@@ -48,9 +45,9 @@ class MyDevice extends Device {
       };
 
       for (let i = 0; i < batteryModules.length; i++) {
-        const serial = await conn.queryString(batteryModules[i].serial);
-        const umax = await conn.queryFloat32(batteryModules[i].umax);
-        const umin = await conn.queryFloat32(batteryModules[i].umin);
+        const serial = await this.conn.queryString(batteryModules[i].serial);
+        const umax = await this.conn.queryFloat32(batteryModules[i].umax);
+        const umin = await this.conn.queryFloat32(batteryModules[i].umin);
         settings[`battery_module_${i}_serial`] = serial;
 
         if (serial === '') {
@@ -61,9 +58,6 @@ class MyDevice extends Device {
       }
 
       await this.setSettings(settings);
-
-      // Close the connection when done
-      conn.close();
     } catch (error) {
       this.log('Error during initialization:', error);
 
@@ -91,6 +85,10 @@ class MyDevice extends Device {
     if (this.pollingInterval) {
       clearInterval(this.pollingInterval);
     }
+    if (this.conn) {
+      this.conn.close();
+      this.conn = null;
+    }
   }
 
   /**
@@ -98,33 +96,29 @@ class MyDevice extends Device {
    */
   async updateDeviceData() {
     if (this.deleted) return;
-    let conn;
+    await this.ensureConnection();
 
     try {
-      // Establish a connection
-      conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
-      await conn.connect();
-
       // Query and update regularly changing data
-      const power = await conn.queryFloat32(Identifier.INVERTER_AC_POWER_W);
+      const power = await this.conn.queryFloat32(Identifier.INVERTER_AC_POWER_W);
       await this.setCapabilityValue('measure_power', Math.round(power));
       const tokens = { measure_power: Math.round(power) };
       const state = {};
       this.homey.flow.getDeviceTriggerCard('measure_power_changed').trigger(this, tokens, state);
 
-      const battery = await conn.queryFloat32(Identifier.BATTERY_SOC);
+      const battery = await this.conn.queryFloat32(Identifier.BATTERY_SOC);
       this.setCapMeasureBattery(Math.round(battery * 100));
 
-      const tgridpower = await conn.queryFloat32(Identifier.TOTAL_GRID_POWER_W);
+      const tgridpower = await this.conn.queryFloat32(Identifier.TOTAL_GRID_POWER_W);
       await this.setCapabilityValue('total_grid_power', Math.round(tgridpower));
 
-      const loadhousehold = await conn.queryFloat32(Identifier.LOAD_HOUSEHOLD_POWER_W);
+      const loadhousehold = await this.conn.queryFloat32(Identifier.LOAD_HOUSEHOLD_POWER_W);
       await this.setCapabilityValue('load_household', Math.round(loadhousehold));
 
-      const batterypower = await conn.queryFloat32(Identifier.BATTERY_POWER_W);
+      const batterypower = await this.conn.queryFloat32(Identifier.BATTERY_POWER_W);
       await this.setCapabilityValue('battery_power', Math.round(batterypower) * -1);
 
-      const deviceSOCStrategy = await conn.query(Identifier.POWER_MNG_SOC_STRATEGY);
+      const deviceSOCStrategy = await this.conn.query(Identifier.POWER_MNG_SOC_STRATEGY);
       await this.setCapSOCStrategy(deviceSOCStrategy);
 
       if (batterypower < -15) {
@@ -135,8 +129,8 @@ class MyDevice extends Device {
         await this.setCapabilityValue('battery_modus', 'idle');
       }
 
-      const solarpowera = await conn.queryFloat32(Identifier.SOLAR_GEN_A_POWER_W);
-      const solarpowerb = await conn.queryFloat32(Identifier.SOLAR_GEN_B_POWER_W);
+      const solarpowera = await this.conn.queryFloat32(Identifier.SOLAR_GEN_A_POWER_W);
+      const solarpowerb = await this.conn.queryFloat32(Identifier.SOLAR_GEN_B_POWER_W);
       const solarpower = solarpowera + solarpowerb;
       await this.setCapSolarPower(Math.round(solarpower));
 
@@ -144,16 +138,18 @@ class MyDevice extends Device {
       this.setAvailable();
     } catch (error) {
       this.log('Error updating device:', error);
+      if (this.conn) {
+        try {
+          this.conn.close();
+        } catch (e) {}
+        this.conn = null;
+      }
 
       // Specific handling for EHOSTUNREACH error
       if (error.code === 'EHOSTUNREACH') {
         await this.setUnavailable(`The target device ${this.getStoreValue('address')}:${this.getStoreValue('port')} is unreachable.`);
       } else {
         await this.setUnavailable('Device is currently unavailable due to an error.');
-      }
-    } finally {
-      if (conn) {
-        conn.close();
       }
     }
   }
@@ -207,30 +203,28 @@ class MyDevice extends Device {
       throw new Error('Inverter Management is disabled. Enable it in the device settings to use this action.');
     }
 
-    let conn;
+    await this.ensureConnection();
 
     try {
-      // Establish a connection
-      conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
-      await conn.connect();
-
       // Set the inverter to disable battery discharge mode
-      await conn.write(Identifier.POWER_MNG_SOC_STRATEGY, SOCStrategy.EXTERNAL);
+      await this.conn.write(Identifier.POWER_MNG_SOC_STRATEGY, SOCStrategy.EXTERNAL);
       await this.setCapSOCStrategy(SOCStrategy.toString(SOCStrategy.EXTERNAL));
-      await conn.write(Identifier.POWER_MNG_BATTERY_POWER_EXTERN_W, 0);
-      await conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, true);
+      await this.conn.write(Identifier.POWER_MNG_BATTERY_POWER_EXTERN_W, 0);
+      await this.conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, true);
     } catch (error) {
       this.log('Error setting disable battery discharge mode:', error);
+      if (this.conn) {
+        try {
+          this.conn.close();
+        } catch (e) {}
+        this.conn = null;
+      }
 
       // Specific handling for EHOSTUNREACH error
       if (error.code === 'EHOSTUNREACH') {
         await this.setUnavailable(`The target device ${this.getStoreValue('address')}:${this.getStoreValue('port')} is unreachable.`);
       } else {
         await this.setUnavailable('Device is currently unavailable due to an error:', error.message);
-      }
-    } finally {
-      if (conn) {
-        conn.close();
       }
     }
   }
@@ -241,33 +235,31 @@ class MyDevice extends Device {
     if (!isEnabled) {
       throw new Error('Inverter Management is disabled. Enable it in the device settings to use this action.');
     }
-    let conn;
+    await this.ensureConnection();
     const defaultMaxGridChargePower = await this.getSetting('default_max_grid_charge_power');
     const defaultSocStrategy = await this.getSetting('default_soc_strategy');
     const defaultUseGridPowerEnabled = await this.getSetting('default_use_grid_power_enabled');
 
     try {
-      // Establish a connection
-      conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
-      await conn.connect();
-
       // Set the inverter to enable solar charging mode
-      await conn.write(Identifier.POWER_MNG_SOC_STRATEGY, Object.entries(SOCStrategy).find(([_, value]) => SOCStrategy.toString(value) === defaultSocStrategy)?.[1] ?? null);
+      await this.conn.write(Identifier.POWER_MNG_SOC_STRATEGY, Object.entries(SOCStrategy).find(([_, value]) => SOCStrategy.toString(value) === defaultSocStrategy)?.[1] ?? null);
       await this.setCapSOCStrategy(defaultSocStrategy);
-      await conn.write(Identifier.POWER_MNG_BATTERY_POWER_EXTERN_W, defaultMaxGridChargePower);
-      await conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, defaultUseGridPowerEnabled);
+      await this.conn.write(Identifier.POWER_MNG_BATTERY_POWER_EXTERN_W, defaultMaxGridChargePower);
+      await this.conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, defaultUseGridPowerEnabled);
     } catch (error) {
       this.log('Error setting enable solar charging mode:', error);
+      if (this.conn) {
+        try {
+          this.conn.close();
+        } catch (e) {}
+        this.conn = null;
+      }
 
       // Specific handling for EHOSTUNREACH error
       if (error.code === 'EHOSTUNREACH') {
         await this.setUnavailable(`The target device ${this.getStoreValue('address')}:${this.getStoreValue('port')} is unreachable.`);
       } else {
         await this.setUnavailable('Device is currently unavailable due to an error.');
-      }
-    } finally {
-      if (conn) {
-        conn.close();
       }
     }
   }
@@ -278,21 +270,23 @@ class MyDevice extends Device {
     if (!isEnabled) {
       throw new Error('Inverter Management is disabled. Enable it in the device settings to use this action.');
     }
-    let conn;
+    await this.ensureConnection();
     const maxGridPower = await this.getSetting('max_grid_charge_power');
 
     try {
-      // Establish a connection
-      conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
-      await conn.connect();
-
       // Set the inverter to enable grid charging mode
-      await conn.write(Identifier.POWER_MNG_SOC_STRATEGY, SOCStrategy.EXTERNAL);
+      await this.conn.write(Identifier.POWER_MNG_SOC_STRATEGY, SOCStrategy.EXTERNAL);
       await this.setCapSOCStrategy(SOCStrategy.toString(SOCStrategy.EXTERNAL));
-      await conn.write(Identifier.POWER_MNG_BATTERY_POWER_EXTERN_W, -1 * maxGridPower);
-      await conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, true);
+      await this.conn.write(Identifier.POWER_MNG_BATTERY_POWER_EXTERN_W, -1 * maxGridPower);
+      await this.conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, true);
     } catch (error) {
       this.log('Error setting enable grid charging mode:', error);
+      if (this.conn) {
+        try {
+          this.conn.close();
+        } catch (e) {}
+        this.conn = null;
+      }
 
       // Specific handling for EHOSTUNREACH error
       if (error.code === 'EHOSTUNREACH') {
@@ -300,9 +294,17 @@ class MyDevice extends Device {
       } else {
         await this.setUnavailable('Device is currently unavailable due to an error.');
       }
-    } finally {
-      if (conn) {
-        conn.close();
+    }
+  }
+
+  async ensureConnection() {
+    if (!this.conn) {
+      this.conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
+      try {
+        await this.conn.connect();
+      } catch (error) {
+        this.log('Error connecting to device:', error);
+        throw new Error(`Could not connect to device at ${this.getStoreValue('address')}:${this.getStoreValue('port')}`);
       }
     }
   }
