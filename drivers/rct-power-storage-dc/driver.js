@@ -94,9 +94,9 @@ class MyDriver extends Driver {
           data: {
             id: strInverterSN,
           },
-          store: {
-            address: data.host,
-            port: data.port,
+          settings: {
+            DeviceIP: data.host,
+            DevicePort: data.port,
           },
         };
         this.log(device);

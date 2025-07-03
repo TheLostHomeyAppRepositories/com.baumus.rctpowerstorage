@@ -37,10 +37,10 @@ class MyDevice extends Device {
         { serial: Identifier.BATTERY_MODULE_6_SERIAL, umax: Identifier.BATTERY_MODULE_6_UMAX, umin: Identifier.BATTERY_MODULE_6_UMIN },
       ];
 
-      const settings = {
-        DeviceId: this.getData().id,
-        DeviceIP: this.getStoreValue('address'),
-        DevicePort: this.getStoreValue('port'),
+      const updateSettings = {
+        // DeviceId: this.getData().id,
+        // DeviceIP: this.getSetting('DeviceIP'),
+        // DevicePort: this.getSetting('DevicePort'),
         battery_capacity: roundedCapacity.toString(),
       };
 
@@ -48,22 +48,22 @@ class MyDevice extends Device {
         const serial = await this.conn.queryString(batteryModules[i].serial);
         const umax = await this.conn.queryFloat32(batteryModules[i].umax);
         const umin = await this.conn.queryFloat32(batteryModules[i].umin);
-        settings[`battery_module_${i}_serial`] = serial;
+        updateSettings[`battery_module_${i}_serial`] = serial;
 
         if (serial === '') {
-          settings[`battery_module_${i}_health`] = '';
+          updateSettings[`battery_module_${i}_health`] = '';
         } else {
-          settings[`battery_module_${i}_health`] = (umax < 3.500 && umin >= 3.000) ? 'good' : 'bad';
+          updateSettings[`battery_module_${i}_health`] = (umax < 3.500 && umin >= 3.000) ? 'good' : 'bad';
         }
       }
 
-      await this.setSettings(settings);
+      await this.setSettings(updateSettings);
     } catch (error) {
       this.log('Error during initialization:', error);
 
       // Specific handling for EHOSTUNREACH error
       if (error.code === 'EHOSTUNREACH') {
-        await this.setUnavailable(`The target device ${this.getStoreValue('address')}:${this.getStoreValue('port')} is unreachable.`);
+        await this.setUnavailable(`The target device ${this.getSetting('DeviceIP')}:${this.getSetting('DevicePort')} is unreachable.`);
       } else {
         // Handle other errors or set as unavailable
         await this.setUnavailable('Device is currently unavailable due to an error.');
@@ -152,7 +152,7 @@ class MyDevice extends Device {
 
       // Specific handling for EHOSTUNREACH error
       if (error.code === 'EHOSTUNREACH') {
-        await this.setUnavailable(`The target device ${this.getStoreValue('address')}:${this.getStoreValue('port')} is unreachable.`);
+        await this.setUnavailable(`The target device ${this.getSetting('DeviceIP')}:${this.getSetting('DevicePort')} is unreachable.`);
       } else {
         await this.setUnavailable('Device is currently unavailable due to an error.');
       }
@@ -203,6 +203,7 @@ class MyDevice extends Device {
 
   // Set Inverter to disable battery discharge mode
   async disableBatteryDischarge() {
+    this.log('disableBatteryDischarge called');
     const isEnabled = await this.getSetting('enable_inverter_management');
     if (!isEnabled) {
       throw new Error('Inverter Management is disabled. Enable it in the device settings to use this action.');
@@ -226,7 +227,7 @@ class MyDevice extends Device {
 
       // Specific handling for EHOSTUNREACH error
       if (error.code === 'EHOSTUNREACH') {
-        await this.setUnavailable(`The target device ${this.getStoreValue('address')}:${this.getStoreValue('port')} is unreachable.`);
+        await this.setUnavailable(`The target device ${this.getSetting('DeviceIP')}:${this.getSetting('DevicePort')} is unreachable.`);
       } else {
         await this.setUnavailable('Device is currently unavailable due to an error:', error.message);
       }
@@ -235,6 +236,7 @@ class MyDevice extends Device {
 
   // Set Inverter to enable solar charging mode
   async enableDefaultOperatingMode() {
+    this.log('enableDefaultOperatingMode called');
     const isEnabled = await this.getSetting('enable_inverter_management');
     if (!isEnabled) {
       throw new Error('Inverter Management is disabled. Enable it in the device settings to use this action.');
@@ -261,7 +263,7 @@ class MyDevice extends Device {
 
       // Specific handling for EHOSTUNREACH error
       if (error.code === 'EHOSTUNREACH') {
-        await this.setUnavailable(`The target device ${this.getStoreValue('address')}:${this.getStoreValue('port')} is unreachable.`);
+        await this.setUnavailable(`The target device ${this.getSetting('DeviceIP')}:${this.getSetting('DevicePort')} is unreachable.`);
       } else {
         await this.setUnavailable('Device is currently unavailable due to an error.');
       }
@@ -270,6 +272,7 @@ class MyDevice extends Device {
 
   // Set Inverter to enable grid charging mode
   async enableGridCharging() {
+    this.log('enableGridCharging called');
     const isEnabled = await this.getSetting('enable_inverter_management');
     if (!isEnabled) {
       throw new Error('Inverter Management is disabled. Enable it in the device settings to use this action.');
@@ -294,7 +297,7 @@ class MyDevice extends Device {
 
       // Specific handling for EHOSTUNREACH error
       if (error.code === 'EHOSTUNREACH') {
-        await this.setUnavailable(`The target device ${this.getStoreValue('address')}:${this.getStoreValue('port')} is unreachable.`);
+        await this.setUnavailable(`The target device ${this.getSetting('DeviceIP')}:${this.getSetting('DevicePort')} is unreachable.`);
       } else {
         await this.setUnavailable('Device is currently unavailable due to an error.');
       }
@@ -311,16 +314,16 @@ class MyDevice extends Device {
         }
         return false; // silent fail für Polling
       }
-      this.conn = Connection.getPooledConnection(this.getStoreValue('address'), this.getStoreValue('port'), 5000);
+      this.conn = Connection.getPooledConnection(this.getSetting('DeviceIP'), this.getSetting('DevicePort'), 5000);
       try {
         await this.conn.connect();
       } catch (error) {
         this._lastConnectAttempt = now;
         this.log('Error connecting to device:', error);
         this.conn = null;
-        this.setUnavailable(`Could not connect to device at ${this.getStoreValue('address')}:${this.getStoreValue('port')}`);
+        this.setUnavailable(`Could not connect to device at ${this.getSetting('DeviceIP')}:${this.getSetting('DevicePort')}`);
         if (throwOnError) {
-          throw new Error(`Could not connect to device at ${this.getStoreValue('address')}:${this.getStoreValue('port')}`);
+          throw new Error(`Could not connect to device at ${this.getSetting('DeviceIP')}:${this.getSetting('DevicePort')}`);
         }
         return false;
       }
