@@ -64,5 +64,8 @@
   },
   "2.1.6": {
     "en": "Fix: Reconnect device"
+  },
+  "2.1.7": {
+    "en": "fix: connection stability"
   }
 }
