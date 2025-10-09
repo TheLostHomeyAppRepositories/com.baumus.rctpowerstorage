@@ -70,5 +70,8 @@
   },
   "2.1.8": {
     "en": "fix: connection stability"
+  },
+  "2.1.9": {
+    "en": "fix: race condition"
   }
 }
