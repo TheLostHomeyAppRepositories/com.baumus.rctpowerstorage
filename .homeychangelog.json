@@ -184,5 +184,8 @@
   },
   "4.4.1": {
     "en": "feat: Enhance energy optimization logic"
+  },
+  "4.5.0": {
+    "en": "feat: Add battery tower count and capacity labels to device and driver configuration"
   }
 }
