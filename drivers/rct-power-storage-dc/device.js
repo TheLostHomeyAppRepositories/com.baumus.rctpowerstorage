@@ -52,13 +52,29 @@ class MyDevice extends RCTDevice {
     // Initialize energy tracking
     this._lastUpdate = Date.now();
     this._lastBatteryPower = 0;
+    this._batteryTowerCount = 1;
+    this._tower1CapacityKWh = 0;
+    this._tower2CapacityKWh = 0;
 
     // Error handling for connection errors
     try {
-      // Query the Battery Capacity and Module Health (only during initialization)
-      const bcapacity = await this.conn.queryFloat32(Identifier.BATTERY_CAPACITY_AH);
-      const bvoltage = await this.conn.queryFloat32(Identifier.BATTERY_VOLTAGE);
-      const roundedCapacity = (Math.round(((bcapacity * bvoltage) / 1000) * 10) / 10).toFixed(1);
+      // Query tower count and per-tower capacity for accurate system totals
+      const towerCount = await this.conn.query(Identifier.BATTERY_SYSTEM_TOWER_COUNT).catch(() => 1);
+      this._batteryTowerCount = (typeof towerCount === 'number' && towerCount >= 1) ? towerCount : 1;
+
+      const bcapacity1 = await this.conn.queryFloat32(Identifier.BATTERY_TOWER_1_CAPACITY_AH);
+      const bvoltage1 = await this.conn.queryFloat32(Identifier.BATTERY_TOWER_1_VOLTAGE);
+      this._tower1CapacityKWh = (bcapacity1 * bvoltage1) / 1000;
+
+      let totalCapacityKWh = this._tower1CapacityKWh;
+      if (this._batteryTowerCount >= 2) {
+        const bcapacity2 = await this.conn.queryFloat32(Identifier.BATTERY_TOWER_2_CAPACITY_AH).catch(() => 0);
+        const bvoltage2 = await this.conn.queryFloat32(Identifier.BATTERY_TOWER_2_VOLTAGE).catch(() => 0);
+        this._tower2CapacityKWh = (bcapacity2 * bvoltage2) / 1000;
+        totalCapacityKWh += this._tower2CapacityKWh;
+      }
+
+      const roundedCapacity = (Math.round(totalCapacityKWh * 10) / 10).toFixed(1);
 
       const batteryModules = [
         { serial: Identifier.BATTERY_MODULE_0_SERIAL, umax: Identifier.BATTERY_MODULE_0_UMAX, umin: Identifier.BATTERY_MODULE_0_UMIN },
@@ -70,11 +86,19 @@ class MyDevice extends RCTDevice {
         { serial: Identifier.BATTERY_MODULE_6_SERIAL, umax: Identifier.BATTERY_MODULE_6_UMAX, umin: Identifier.BATTERY_MODULE_6_UMIN },
       ];
 
+      const tower1CapacityRounded = (Math.round(this._tower1CapacityKWh * 10) / 10).toFixed(1);
+      const tower2CapacityRounded = this._batteryTowerCount >= 2
+        ? (Math.round(this._tower2CapacityKWh * 10) / 10).toFixed(1)
+        : '';
+
       const updateSettings = {
         // DeviceId: this.getData().id,
         // DeviceIP: this.getSetting('DeviceIP'),
         // DevicePort: this.getSetting('DevicePort'),
         battery_capacity: roundedCapacity.toString(),
+        battery_tower_count: String(this._batteryTowerCount),
+        battery_tower_1_capacity: tower1CapacityRounded,
+        battery_tower_2_capacity: tower2CapacityRounded,
       };
 
       for (let i = 0; i < batteryModules.length; i++) {
@@ -163,9 +187,19 @@ class MyDevice extends RCTDevice {
       const state = {};
       this.homey.flow.getDeviceTriggerCard('measure_power_changed').trigger(this, tokens, state);
 
-      // Battery SOC
-      const battery = await this.conn.queryFloat32(Identifier.BATTERY_SOC);
-      this.setCapMeasureBattery(Math.round(battery * 100));
+      // Battery SOC - weighted system SoC across all towers
+      let systemSocPercent;
+      if (this._batteryTowerCount >= 2 && (this._tower1CapacityKWh + this._tower2CapacityKWh) > 0) {
+        const soc1 = await this.conn.queryFloat32(Identifier.BATTERY_TOWER_1_SOC);
+        const soc2 = await this.conn.queryFloat32(Identifier.BATTERY_TOWER_2_SOC).catch(() => soc1);
+        const totalCap = this._tower1CapacityKWh + this._tower2CapacityKWh;
+        const weightedSoc = (soc1 * this._tower1CapacityKWh + soc2 * this._tower2CapacityKWh) / totalCap;
+        systemSocPercent = Math.round(weightedSoc * 100);
+      } else {
+        const soc = await this.conn.queryFloat32(Identifier.BATTERY_TOWER_1_SOC);
+        systemSocPercent = Math.round(soc * 100);
+      }
+      this.setCapMeasureBattery(systemSocPercent);
 
       // Grid power (keep custom capability)
       const tgridpower = await this.conn.queryFloat32(Identifier.TOTAL_GRID_POWER_W);
@@ -275,18 +309,20 @@ class MyDevice extends RCTDevice {
       await this.conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, true);
     } catch (error) {
       this.log('Error setting disable battery discharge mode:', error);
+      if (error.code === 'BATTERY_NOT_NORMAL') {
+        this.log(`Battery not in normal operation - discharge lock skipped: ${error.message}`);
+        throw error;
+      }
       if (this.conn) {
         try {
           this.conn.close();
         } catch (e) {}
         this.conn = null;
       }
-
-      // Specific handling for EHOSTUNREACH error
       if (error.code === 'EHOSTUNREACH') {
         await this.setUnavailable(`The target device ${this.getSetting('DeviceIP')}:${this.getSetting('DevicePort')} is unreachable.`);
       } else {
-        await this.setUnavailable('Device is currently unavailable due to an error:', error.message);
+        await this.setUnavailable('Device is currently unavailable due to an error.');
       }
     }
   }
@@ -311,14 +347,16 @@ class MyDevice extends RCTDevice {
       await this.conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, defaultUseGridPowerEnabled);
     } catch (error) {
       this.log('Error setting enable solar charging mode:', error);
+      if (error.code === 'BATTERY_NOT_NORMAL') {
+        this.log(`Battery not in normal operation - default mode skipped: ${error.message}`);
+        throw error;
+      }
       if (this.conn) {
         try {
           this.conn.close();
         } catch (e) {}
         this.conn = null;
       }
-
-      // Specific handling for EHOSTUNREACH error
       if (error.code === 'EHOSTUNREACH') {
         await this.setUnavailable(`The target device ${this.getSetting('DeviceIP')}:${this.getSetting('DevicePort')} is unreachable.`);
       } else {
@@ -345,14 +383,16 @@ class MyDevice extends RCTDevice {
       await this.conn.write(Identifier.POWER_MNG_USE_GRID_POWER_ENABLE, true);
     } catch (error) {
       this.log('Error setting enable grid charging mode:', error);
+      if (error.code === 'BATTERY_NOT_NORMAL') {
+        this.log(`Battery not in normal operation - grid charging skipped: ${error.message}`);
+        throw error;
+      }
       if (this.conn) {
         try {
           this.conn.close();
         } catch (e) {}
         this.conn = null;
       }
-
-      // Specific handling for EHOSTUNREACH error
       if (error.code === 'EHOSTUNREACH') {
         await this.setUnavailable(`The target device ${this.getSetting('DeviceIP')}:${this.getSetting('DevicePort')} is unreachable.`);
       } else {

@@ -1007,6 +1007,30 @@
               }
             },
             {
+              "id": "battery_tower_count",
+              "type": "label",
+              "value": "",
+              "label": {
+                "en": "Number of Battery Towers"
+              }
+            },
+            {
+              "id": "battery_tower_1_capacity",
+              "type": "label",
+              "value": "",
+              "label": {
+                "en": "Tower 1 Capacity in kWh"
+              }
+            },
+            {
+              "id": "battery_tower_2_capacity",
+              "type": "label",
+              "value": "",
+              "label": {
+                "en": "Tower 2 Capacity in kWh"
+              }
+            },
+            {
               "id": "DeviceIP",
               "type": "label",
               "value": "",
